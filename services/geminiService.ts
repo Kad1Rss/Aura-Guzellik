@@ -1,10 +1,34 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// İstemciyi (Client) global değil, ihtiyaç duyulduğunda oluşturmak için değişken tanımlıyoruz.
+// Bu, uygulamanın açılışta "process is not defined" hatası verip çökmesini engeller.
+let ai: GoogleGenAI | null = null;
+
+const getAiClient = () => {
+  if (ai) return ai;
+
+  // Vercel (Vite) ortamında 'import.meta.env', yerel ortamda 'process.env' kullanılır.
+  // @ts-ignore
+  const apiKey = import.meta.env?.VITE_API_KEY || process.env.API_KEY;
+
+  if (!apiKey) {
+    console.error("API Anahtarı Bulunamadı! Lütfen Vercel ayarlarından VITE_API_KEY eklediğinizden emin olun.");
+    return null;
+  }
+
+  ai = new GoogleGenAI({ apiKey: apiKey });
+  return ai;
+};
 
 export const getBeautyAdvice = async (userQuery: string): Promise<string> => {
   try {
-    const response = await ai.models.generateContent({
+    const client = getAiClient();
+    
+    if (!client) {
+      return "Sistem şu an güncelleniyor, lütfen Hülya Hanım'a WhatsApp üzerinden ulaşın: 0546 618 30 62";
+    }
+
+    const response = await client.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: userQuery,
       config: {
