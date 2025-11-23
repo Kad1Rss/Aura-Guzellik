@@ -136,16 +136,17 @@ const AiConsultant: React.FC = () => {
               <span className="text-xl">💡</span>
               Kız Kıza Konuşalım:
             </h4>
-            {/* Mobile optimized horizontal scrolling list */}
-            <div className="flex lg:flex-wrap gap-3 overflow-x-auto pb-4 snap-x hide-scrollbar -mx-2 px-2 md:mx-0 md:px-0">
+            {/* Mobile optimized: Stacks vertically on mobile, wraps on desktop. No hidden scrollbar. */}
+            <div className="grid grid-cols-1 gap-2.5 sm:flex sm:flex-wrap">
               {displayQuestions.map((q, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSuggestionClick(q)}
                   disabled={loading}
-                  className="snap-start shrink-0 px-4 py-3 bg-rose-50/50 hover:bg-rose-500 hover:text-white text-rose-900 rounded-xl text-sm font-medium transition-all duration-200 border border-rose-100 shadow-sm whitespace-nowrap active:scale-95"
+                  className="w-full sm:w-auto px-4 py-3 bg-rose-50 hover:bg-rose-500 hover:text-white text-rose-900 rounded-xl text-sm font-medium transition-all duration-200 border border-rose-100 shadow-sm text-left active:scale-95 flex items-center gap-2"
                 >
-                  {q}
+                  <span className="text-lg shrink-0">💬</span>
+                  <span>{q}</span>
                 </button>
               ))}
             </div>
