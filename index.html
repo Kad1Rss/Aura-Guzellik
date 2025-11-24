@@ -14,7 +14,25 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'AW-11510998921');
+      // Gelişmiş Dönüşümler için user_data parametresi
+      // Bu veriler form gönderildiğinde dinamik olarak doldurulabilir
+      gtag('set', 'user_data', {
+        "email": "", 
+        "phone_number": "",
+        "address": {
+          "first_name": "",
+          "last_name": "",
+          "street": "",
+          "city": "",
+          "region": "",
+          "postal_code": "",
+          "country": ""
+        }
+      });
+
+      gtag('config', 'AW-11510998921', {
+        'allow_enhanced_conversions': true
+      });
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
