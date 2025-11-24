@@ -57,11 +57,11 @@ const Hero: React.FC = () => {
         {/* Right: Main Photo */}
         <div className="w-full md:w-1/2 relative animate-fade-in-up delay-300 order-1 md:order-2 px-6 md:px-0">
            <div className="relative rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-xl border-4 md:border-8 border-white">
-             {/* Main Hero Image - Height optimized for mobile */}
+             {/* Main Hero Image - Height optimized for mobile and Object Center for better cropping */}
              <img 
                src={HERO_IMAGE_URL} 
                alt="Uzman Hülya Sel ve Aura Güzellik Salonu" 
-               className="w-full h-[250px] md:h-auto object-cover object-top md:object-center md:min-h-[500px]"
+               className="w-full h-[250px] md:h-auto object-cover object-center md:min-h-[500px]"
              />
              
              {/* Overlay Gradient */}
