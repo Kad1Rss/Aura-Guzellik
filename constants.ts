@@ -10,6 +10,8 @@ export interface BeautyTip {
 }
 
 // İLETİŞİM BİLGİLERİ
+export const PHONE_NUMBER_DISPLAY = "+90 546 618 30 62";
+export const PHONE_LINK = "tel:+905466183062";
 export const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=905466183062&text&type=phone_number&app_absent=0";
 export const INSTAGRAM_LINK = "https://www.instagram.com/auraguzellikmerkezi01/";
 

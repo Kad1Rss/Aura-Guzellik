@@ -7,9 +7,27 @@ let ai: GoogleGenAI | null = null;
 const getAiClient = () => {
   if (ai) return ai;
 
-  // Vercel (Vite) ortamında 'import.meta.env', yerel ortamda 'process.env' kullanılır.
-  // @ts-ignore
-  const apiKey = import.meta.env?.VITE_API_KEY || process.env.API_KEY;
+  // Güvenli API Anahtarı okuma (Vite/Vercel ve Local uyumlu)
+  let apiKey = '';
+  try {
+    // @ts-ignore
+    if (typeof import.meta !== 'undefined' && import.meta.env) {
+      // @ts-ignore
+      apiKey = import.meta.env.VITE_API_KEY;
+    }
+  } catch (e) {
+    // import.meta hatası yutulur
+  }
+
+  if (!apiKey) {
+    try {
+      if (typeof process !== 'undefined' && process.env) {
+        apiKey = process.env.API_KEY || '';
+      }
+    } catch (e) {
+      // process hatası yutulur
+    }
+  }
 
   if (!apiKey) {
     console.error("API Anahtarı Bulunamadı! Lütfen Vercel ayarlarından VITE_API_KEY eklediğinizden emin olun.");

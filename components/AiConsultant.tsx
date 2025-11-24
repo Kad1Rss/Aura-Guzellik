@@ -12,7 +12,7 @@ const AiConsultant: React.FC = () => {
   const [messages, setMessages] = useState<ConsultantMessage[]>([
     { 
       role: 'model', 
-      text: 'Selam güzellik! 🌸 Ben Aura. Hülya Hanım\'ın 20 yıllık tecrübesiyle seni dinlemek için buradayım. Cildin, bakım rutinlerin veya işlemlerimiz hakkında aklına ne takılırsa, çekinme sor. Sanki kız kıza kahve içiyormuşuz gibi dertleşelim! ☕✨' 
+      text: 'Merhaba! 👋 Ben salonumuzun güzellik asistanı ve Hülya Hanım\'ın yardımcısıyım. İstediğin her şeyi çekinmeden sorabilirsin, yardımcı olmak için buradayım! ✨' 
     }
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);

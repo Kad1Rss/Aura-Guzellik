@@ -1,5 +1,5 @@
 import React from 'react';
-import { WHATSAPP_LINK } from '../constants';
+import { WHATSAPP_LINK, PHONE_LINK, PHONE_NUMBER_DISPLAY } from '../constants';
 
 const Contact: React.FC = () => {
   return (
@@ -36,7 +36,11 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">Telefon & WhatsApp</h4>
-                  <p className="text-rose-200 text-sm">+90 546 618 30 62</p>
+                  <p className="text-rose-200 text-sm">
+                    <a href={PHONE_LINK} className="hover:underline hover:text-white transition-colors">
+                      {PHONE_NUMBER_DISPLAY}
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
