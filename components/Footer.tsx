@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3 text-rose-200/90 text-sm md:text-base">
                <div className="flex justify-between items-center border-b border-rose-800/50 pb-2"><span>Pazartesi</span> <span className="font-medium tracking-wide">09:00 - 22:00</span></div>
                <div className="flex justify-between items-center border-b border-rose-800/50 pb-2"><span>Salı</span> <span className="font-medium tracking-wide">09:00 - 22:00</span></div>
-               <div className="flex justify-between items-center border-b border-rose-800/50 pb-2"><span>Çarşamba</span> <span className="font-medium tracking-wide">09:00 - 22:00</span></div>
+               <div className="flex justify-between items-center border-b border-rose-800/50 pb-2 opacity-75"><span>Çarşamba</span> <span className="font-bold tracking-wide text-rose-400">KAPALI</span></div>
                <div className="flex justify-between items-center border-b border-rose-800/50 pb-2"><span>Perşembe</span> <span className="font-medium tracking-wide">09:00 - 22:00</span></div>
                <div className="flex justify-between items-center border-b border-rose-800/50 pb-2"><span>Cuma</span> <span className="font-medium tracking-wide">09:00 - 22:00</span></div>
                <div className="flex justify-between items-center border-b border-rose-800/50 pb-2"><span>Cumartesi</span> <span className="font-medium tracking-wide">09:00 - 22:00</span></div>
