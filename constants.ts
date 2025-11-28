@@ -14,6 +14,7 @@ export const PHONE_NUMBER_DISPLAY = "+90 546 618 30 62";
 export const PHONE_LINK = "tel:+905466183062";
 export const WHATSAPP_LINK = "https://api.whatsapp.com/send/?phone=905466183062&text&type=phone_number&app_absent=0";
 export const INSTAGRAM_LINK = "https://www.instagram.com/auraguzellikmerkezi01/";
+export const EMAIL_ADDRESS = "selhulya1@gmail.com"; // Güncellenen mail adresi
 
 // ANA EKRAN (GİRİŞ) RESMİ - BURADAN DEĞİŞTİREBİLİRSİNİZ
 export const HERO_IMAGE_URL = "https://i.ibb.co/359JTL8J/header.jpg";
@@ -84,6 +85,34 @@ export const SERVICES: Service[] = [
     description: 'Cildin kolajen üretimini tetikleyerek sivilce izleri, gözenek ve ince kırışıklıkları tedavi ediyoruz. Yenilenmiş bir cilt.',
     imageUrl: 'https://i.ibb.co/kVcP5HBL/dermapen.jpg',
     icon: '💉'
+  },
+  {
+    id: '9',
+    title: 'Profesyonel Saç Kesimi',
+    description: 'Yüz hattınıza en uygun, modern ve trend saç kesimleri. Uzman dokunuşlarla saçlarınıza hacim, hareket ve sağlık kazandırın.',
+    imageUrl: 'https://i.ibb.co/mrPn5hQS/sa-kesimi.jpg',
+    icon: '💇‍♀️'
+  },
+  {
+    id: '10',
+    title: 'Saç Boyama & Renklendirme',
+    description: 'Saçlarınızı yıpratmadan, en kaliteli boyalarla hayalinizdeki renge kavuşturuyoruz. Ombre, sombre ve balyaj teknikleriyle ışıltılı geçişler.',
+    imageUrl: 'https://i.ibb.co/LdJ9VBFM/sa-boyama.jpg',
+    icon: '🎨'
+  },
+  {
+    id: '11',
+    title: 'Gelin Başı & Özel Tasarım',
+    description: 'En özel gününüzde prensesler gibi hissedin. Prova dahil gelin başı, nişan saçı ve türban tasarım hizmetlerimizle kusursuz görünüm.',
+    imageUrl: 'https://i.ibb.co/QFKF3vg2/gelinba.jpg',
+    icon: '👰'
+  },
+  {
+    id: '12',
+    title: 'Profesyonel Porselen Makyaj',
+    description: 'Özel günleriniz için suya dayanıklı, 24 saat kalıcı porselen makyaj. Yüz hatlarınızı belirginleştiren profesyonel contour teknikleri.',
+    imageUrl: 'https://i.ibb.co/4ZLhQHLB/makyaj.jpg',
+    icon: '💄'
   }
 ];
 

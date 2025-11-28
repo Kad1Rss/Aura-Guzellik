@@ -13,6 +13,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-rose-50 font-sans text-gray-800 selection:bg-rose-200 selection:text-rose-900">
       
+      {/* Hero Bölümü */}
       <Hero />
 
       <main>

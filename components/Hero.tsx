@@ -36,18 +36,23 @@ const Hero: React.FC = () => {
             <span className="text-rose-800 font-bold mt-1 block">Uzman Hülya Sel Yönetiminde</span>
           </p>
           
-          <div className="flex flex-col w-full sm:w-auto sm:flex-row gap-2 md:gap-3 animate-fade-in-up delay-300 px-4 md:px-0">
+          <div className="flex flex-col w-full sm:w-auto sm:flex-row gap-3 md:gap-3 animate-fade-in-up delay-300 px-4 md:px-0">
+            {/* Randevu Al Button - Main CTA with Pulse Animation */}
             <a 
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noreferrer"
-              className="w-full sm:w-auto px-6 py-3 bg-rose-600 text-white font-semibold rounded-full shadow-xl hover:bg-rose-700 active:scale-95 transition-all flex items-center justify-center gap-2 text-base md:text-lg"
+              className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-rose-600 to-rose-500 text-white font-bold rounded-full shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 text-base md:text-lg animate-pulse ring-2 ring-rose-200 ring-offset-2"
             >
-              <span>Hemen Randevu Al</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+              </svg>
+              <span>Randevu Al</span>
             </a>
+            
             <button 
               onClick={scrollToServices}
-              className="w-full sm:w-auto px-6 py-3 bg-white/80 backdrop-blur-sm text-rose-900 font-semibold rounded-full shadow-lg hover:bg-white active:scale-95 transition-all border border-rose-200 text-center cursor-pointer text-base md:text-lg"
+              className="w-full sm:w-auto px-6 py-3 bg-white/80 backdrop-blur-sm text-rose-900 font-semibold rounded-full shadow-lg hover:bg-white active:scale-95 transition-all border border-rose-200 text-center cursor-pointer text-base md:text-lg sm:mt-0 mt-1"
             >
               Hizmetleri İncele
             </button>
@@ -57,7 +62,7 @@ const Hero: React.FC = () => {
         {/* Right: Main Photo */}
         <div className="w-full md:w-1/2 relative animate-fade-in-up delay-300 order-1 md:order-2 px-6 md:px-0">
            <div className="relative rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-xl border-4 md:border-8 border-white">
-             {/* Main Hero Image - Height optimized for mobile and Object Center for better cropping */}
+             {/* Main Hero Image */}
              <img 
                src={HERO_IMAGE_URL} 
                alt="Uzman Hülya Sel ve Aura Güzellik Salonu" 
