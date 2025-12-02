@@ -1,6 +1,6 @@
 import React from 'react';
 import { Service } from '../types';
-import { WHATSAPP_LINK } from '../constants';
+import { WHATSAPP_NUMBER } from '../constants';
 
 interface ServiceCardProps {
   service: Service;
@@ -8,6 +8,10 @@ interface ServiceCardProps {
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
+  // Hizmete özel WhatsApp mesajı oluştur
+  const message = `Merhaba, ${service.title} hizmetinizle ilgili detaylı bilgi ve fiyat almak istiyorum. 🌸`;
+  const whatsappUrl = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}&type=phone_number&app_absent=0`;
+
   return (
     <div 
       className="group relative bg-white rounded-lg md:rounded-2xl shadow-sm md:shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 md:transform md:hover:-translate-y-2 flex flex-col h-full"
@@ -43,7 +47,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
         </p>
         
         <a 
-          href={WHATSAPP_LINK}
+          href={whatsappUrl}
           target="_blank" 
           rel="noreferrer"
           className="w-full mt-auto py-1.5 md:py-3 px-2 md:px-4 rounded md:rounded-xl bg-rose-50 text-rose-600 font-bold text-center border border-rose-100 hover:bg-rose-600 hover:text-white transition-all active:scale-95 flex items-center justify-center gap-1 text-[10px] md:text-base"
