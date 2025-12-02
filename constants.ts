@@ -16,6 +16,8 @@ export const PHONE_LINK = "tel:+905466183062";
 export const WHATSAPP_LINK = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text&type=phone_number&app_absent=0`;
 export const INSTAGRAM_LINK = "https://www.instagram.com/auraguzellikmerkezi01/";
 export const EMAIL_ADDRESS = "selhulya1@gmail.com"; // Güncellenen mail adresi
+// Kullanıcının verdiği ID ile çalışan Google Maps kısa linki
+export const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/DNtT9Tu1hs6Hsq86r"; 
 
 // ANA EKRAN (GİRİŞ) RESMİ - BURADAN DEĞİŞTİREBİLİRSİNİZ
 export const HERO_IMAGE_URL = "https://i.ibb.co/359JTL8J/header.jpg";

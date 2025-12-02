@@ -10,7 +10,7 @@ const FloatingActions: React.FC = () => {
         className="group flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-blue-600 text-white rounded-full shadow-xl hover:scale-110 transition-all duration-300 relative animate-bounce-subtle"
         aria-label="Telefonla Ara"
       >
-        <div className="hidden md:block absolute right-full mr-3 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        <div className="hidden md:block absolute right-full mr-3 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-bold">
           Hemen Ara
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -26,7 +26,7 @@ const FloatingActions: React.FC = () => {
         className="group flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-green-500 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 relative ring-4 ring-white/30"
         aria-label="WhatsApp"
       >
-        <div className="hidden md:block absolute right-full mr-3 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        <div className="hidden md:block absolute right-full mr-3 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-bold">
           WhatsApp Destek
         </div>
         <span className="absolute -top-1 -right-1 flex h-4 w-4">
@@ -46,9 +46,9 @@ const FloatingActions: React.FC = () => {
         className="group flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 rounded-full shadow-xl hover:scale-110 transition-all duration-300 relative"
         aria-label="Instagram"
       >
-        {/* Tooltip only on desktop to prevent mobile clutter */}
-        <div className="hidden md:block absolute right-full mr-3 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-          Bizi Takip Edin
+        {/* Tooltip updated to encourage following */}
+        <div className="hidden md:block absolute right-full mr-3 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-bold">
+          Instagram'da Takip Et
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white md:w-7 md:h-7">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>

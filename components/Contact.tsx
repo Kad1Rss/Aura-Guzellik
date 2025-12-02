@@ -1,5 +1,5 @@
 import React from 'react';
-import { WHATSAPP_LINK, PHONE_LINK, PHONE_NUMBER_DISPLAY } from '../constants';
+import { WHATSAPP_LINK, PHONE_LINK, PHONE_NUMBER_DISPLAY, GOOGLE_MAPS_LINK } from '../constants';
 
 const Contact: React.FC = () => {
   return (
@@ -24,7 +24,14 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">Adres</h4>
-                  <p className="text-rose-200 text-sm">KIZILPINAR ATATÜRK MAH.<br/>GARAJ SK. NO: 5 D<br/>59500 Çerkezköy/Tekirdağ</p>
+                  <a 
+                    href={GOOGLE_MAPS_LINK}
+                    target="_blank"
+                    rel="noreferrer" 
+                    className="text-rose-200 text-sm hover:text-white hover:underline transition-colors block mt-1"
+                  >
+                    KIZILPINAR ATATÜRK MAH.<br/>GARAJ SK. NO: 5 D<br/>59500 Çerkezköy/Tekirdağ
+                  </a>
                 </div>
               </div>
 
@@ -70,9 +77,18 @@ const Contact: React.FC = () => {
                title="Aura Güzellik Merkezi Konum"
                className="absolute inset-0 grayscale hover:grayscale-0 transition-all duration-500"
              ></iframe>
-             <div className="absolute bottom-4 left-4 bg-white px-4 py-2 rounded-lg shadow-md text-xs font-bold text-gray-700 pointer-events-none">
-               Aura Güzellik Merkezi
-             </div>
+             <a 
+               href={GOOGLE_MAPS_LINK}
+               target="_blank" 
+               rel="noreferrer"
+               className="absolute bottom-4 left-4 bg-white px-4 py-2 rounded-lg shadow-md text-xs font-bold text-gray-700 hover:text-rose-600 transition-colors flex items-center gap-2"
+             >
+               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+               </svg>
+               Haritada Aç
+             </a>
           </div>
         </div>
       </div>

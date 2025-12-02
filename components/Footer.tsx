@@ -13,7 +13,14 @@ const Footer: React.FC = () => {
               Çerkezköy'ün en kapsamlı güzellik merkezi. Uzman Hülya Sel ve deneyimli ekibi ile güzelliğinize profesyonel dokunuşlar yapıyoruz.
             </p>
             <div className="flex gap-4">
-               <a href={INSTAGRAM_LINK} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-rose-900 flex items-center justify-center hover:bg-rose-700 transition-colors text-white" aria-label="Instagram">
+               <a 
+                 href={INSTAGRAM_LINK} 
+                 target="_blank" 
+                 rel="noreferrer" 
+                 className="w-10 h-10 rounded-full bg-rose-900 flex items-center justify-center hover:bg-rose-700 transition-colors text-white" 
+                 aria-label="Instagram'da Takip Et"
+                 title="Instagram'da Takip Et"
+                >
                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                </a>
                <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center hover:bg-green-700 transition-colors text-white" aria-label="WhatsApp">
