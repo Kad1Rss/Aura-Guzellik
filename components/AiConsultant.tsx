@@ -63,29 +63,50 @@ const AiConsultant: React.FC = () => {
     handleAsk(undefined, suggestion);
   };
 
-  // Helper function to detect links and bold text
+  // Helper function to detect links, bold text AND phone numbers
   const renderMessageText = (text: string) => {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const phoneRegex = /(0546\s618\s30\s62)/g; // Özel numara formatı eşleşmesi
     const boldRegex = /\*\*(.*?)\*\*/g;
 
     const partsWithLinks = text.split(urlRegex);
 
     return partsWithLinks.map((part, i) => {
+      // 1. Link Kontrolü
       if (part.match(urlRegex)) {
         return (
-          <a key={`link-${i}`} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline break-all font-bold inline-block py-1">
-            {part.includes('whatsapp') ? '📲 WhatsApp Hattımız' : part.includes('instagram') ? '📸 Instagram Sayfamız' : 'Bağlantı'}
+          <a key={`link-${i}`} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline break-all font-bold inline-block py-1 bg-blue-50 px-2 rounded-lg mx-1 my-1 border border-blue-100 shadow-sm">
+            {part.includes('whatsapp') ? '📲 WhatsApp Mesaj' : part.includes('instagram') ? '📸 Instagram Sayfası' : 'Bağlantıya Git'}
           </a>
         );
       } else {
-        const partsWithBold = part.split(boldRegex);
+        // 2. Telefon Numarası Kontrolü
+        const partsWithPhone = part.split(phoneRegex);
+        
         return (
-            <span key={`text-${i}`}>
-                {partsWithBold.map((subPart, j) => {
-                    if (j % 2 === 1) {
-                        return <strong key={`bold-${i}-${j}`} className="font-extrabold text-rose-800 bg-rose-50 px-1 rounded">{subPart}</strong>;
+            <span key={`part-${i}`}>
+                {partsWithPhone.map((subPart, k) => {
+                    // Eğer parça telefon numarası ise
+                    if (subPart.match(phoneRegex)) {
+                         return (
+                            <a key={`phone-${i}-${k}`} href="tel:+905466183062" className="text-green-600 hover:text-green-700 font-bold bg-green-50 px-2 py-0.5 rounded border border-green-200 inline-flex items-center gap-1 mx-1 hover:shadow-md transition-all">
+                                📞 {subPart} (Tıkla Ara)
+                            </a>
+                         );
                     }
-                    return subPart;
+
+                    // 3. Kalın Yazı Kontrolü
+                    const partsWithBold = subPart.split(boldRegex);
+                    return (
+                        <span key={`text-${i}-${k}`}>
+                            {partsWithBold.map((innerPart, j) => {
+                                if (j % 2 === 1) {
+                                    return <strong key={`bold-${i}-${k}-${j}`} className="font-extrabold text-rose-800 bg-rose-50 px-1 rounded">{innerPart}</strong>;
+                                }
+                                return innerPart;
+                            })}
+                        </span>
+                    );
                 })}
             </span>
         );
@@ -177,7 +198,7 @@ const AiConsultant: React.FC = () => {
               {messages.map((msg, idx) => (
                 <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div 
-                    className={`max-w-[90%] p-3.5 rounded-2xl text-[15px] leading-relaxed shadow-sm whitespace-pre-wrap ${
+                    className={`max-w-[95%] md:max-w-[90%] p-3.5 rounded-2xl text-[15px] leading-relaxed shadow-sm whitespace-pre-wrap ${
                       msg.role === 'user' 
                         ? 'bg-rose-600 text-white rounded-tr-none' 
                         : 'bg-white text-gray-800 border border-gray-200 rounded-tl-none'
