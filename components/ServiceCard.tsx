@@ -14,15 +14,28 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
 
   return (
     <div 
-      className="group relative bg-white rounded-lg md:rounded-2xl shadow-sm md:shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 md:transform md:hover:-translate-y-2 flex flex-col h-full"
+      className="group relative bg-white rounded-lg md:rounded-2xl shadow-sm md:shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 md:transform md:hover:-translate-y-2 flex flex-col h-full border border-gray-100"
       style={{ animationDelay: `${index * 50}ms` }}
     >
+      {/* GIFT BOW OVERLAY (Top Right) */}
+      <div className="absolute -top-1 -left-1 z-20 w-12 h-12 pointer-events-none opacity-90 drop-shadow-md">
+         <img 
+           src="https://cdn-icons-png.flaticon.com/512/3629/3629562.png" 
+           alt="Ribbon" 
+           className="w-full h-full" 
+           loading="lazy" 
+           width="48"
+           height="48"
+         />
+      </div>
+
       {/* Reduced Height for Mobile Compactness */}
       <div className="h-28 md:h-64 overflow-hidden relative bg-gray-100">
         <img 
           src={service.imageUrl} 
           alt={service.title} 
           loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-rose-900/5 group-hover:bg-rose-900/20 transition-colors duration-300" />
@@ -32,7 +45,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
       <div className="p-2 md:p-8 relative flex flex-col flex-grow">
         
         {/* Icon: Hidden on mobile for cleaner look, or very small */}
-        <div className="absolute -top-4 right-2 w-8 h-8 text-base md:-top-8 md:right-8 md:w-16 md:h-16 md:text-3xl bg-rose-500 rounded-full flex items-center justify-center shadow-lg border-2 md:border-4 border-white z-10">
+        <div className="absolute -top-4 right-2 w-8 h-8 text-base md:-top-8 md:right-8 md:w-16 md:h-16 md:text-3xl bg-rose-500 rounded-full flex items-center justify-center shadow-lg border-2 md:border-4 border-white z-10 group-hover:rotate-12 transition-transform duration-300">
           {service.icon}
         </div>
         

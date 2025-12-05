@@ -135,7 +135,7 @@ const AiConsultant: React.FC = () => {
                <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900">
                  Aura Asistanı
                </h2>
-               {/* Avatar Image */}
+               {/* Avatar Image Container with SANTA HAT */}
                <div className="relative group">
                  <div className="absolute -inset-1 bg-gradient-to-r from-rose-400 to-pink-600 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
                  <img 
@@ -143,7 +143,13 @@ const AiConsultant: React.FC = () => {
                    alt="Aura Uzman Asistanı" 
                    className="relative w-20 h-20 md:w-24 md:h-24 object-cover drop-shadow-xl hover:scale-105 transition-transform duration-300"
                  />
-                 <div className="absolute bottom-0 right-0 bg-green-500 border-2 border-white w-5 h-5 rounded-full animate-pulse"></div>
+                 {/* Santa Hat Overlay */}
+                 <img 
+                    src="https://cdn-icons-png.flaticon.com/512/744/744546.png" 
+                    alt="Santa Hat"
+                    className="absolute -top-6 -right-2 w-12 h-12 transform rotate-12 drop-shadow-md z-20 pointer-events-none"
+                 />
+                 <div className="absolute bottom-0 right-0 bg-green-500 border-2 border-white w-5 h-5 rounded-full animate-pulse z-10"></div>
                </div>
             </div>
             
@@ -152,7 +158,10 @@ const AiConsultant: React.FC = () => {
             </p>
           </div>
 
-          <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-rose-100">
+          <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-rose-100 relative">
+             {/* Decorative Mistletoe */}
+            <div className="absolute -top-3 -left-2 text-3xl transform -rotate-12">🌿</div>
+            
             <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2 text-sm md:text-base">
               <span className="text-xl">💡</span>
               Kız Kıza Konuşalım:
@@ -178,11 +187,20 @@ const AiConsultant: React.FC = () => {
         <div className="flex-1 w-full">
           <div className="bg-white rounded-3xl shadow-2xl border-2 border-rose-100 overflow-hidden flex flex-col h-[500px] md:h-[600px] relative">
             {/* Chat Header */}
-            <div className="bg-gradient-to-r from-rose-500 to-rose-600 p-3 md:p-4 flex items-center gap-3 md:gap-4 shadow-md z-10">
+            <div className="bg-gradient-to-r from-rose-500 to-rose-600 p-3 md:p-4 flex items-center gap-3 md:gap-4 shadow-md z-10 relative">
+                {/* Header Snow/Sparkle Decoration */}
+                <div className="absolute top-0 right-0 w-16 h-16 bg-white opacity-10 rounded-full blur-xl animate-pulse"></div>
+
               <div className="relative">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white border-2 border-rose-200 flex items-center justify-center overflow-hidden p-1">
                   <img src={AVATAR_IMAGE_URL} alt="Asistan" className="w-full h-full object-cover" />
                 </div>
+                 {/* Mini Hat for Chat Header */}
+                 <img 
+                    src="https://cdn-icons-png.flaticon.com/512/744/744546.png" 
+                    className="absolute -top-3 -right-2 w-8 h-8 transform rotate-6 z-20 pointer-events-none"
+                    alt="hat"
+                 />
                 <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-white rounded-full"></div>
               </div>
               <div>
@@ -194,9 +212,14 @@ const AiConsultant: React.FC = () => {
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 scroll-smooth">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 scroll-smooth relative">
+                {/* Subtle Background Pattern for Christmas */}
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+                     style={{backgroundImage: 'url("https://www.transparenttextures.com/patterns/snow.png")'}}>
+                </div>
+
               {messages.map((msg, idx) => (
-                <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} relative z-10`}>
                   <div 
                     className={`max-w-[95%] md:max-w-[90%] p-3.5 rounded-2xl text-[15px] leading-relaxed shadow-sm whitespace-pre-wrap ${
                       msg.role === 'user' 
@@ -209,7 +232,7 @@ const AiConsultant: React.FC = () => {
                 </div>
               ))}
               {loading && (
-                <div className="flex justify-start">
+                <div className="flex justify-start relative z-10">
                   <div className="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm border border-gray-200 flex items-center gap-2">
                     <span className="text-xs text-gray-400 font-semibold">Yazıyor...</span>
                     <div className="flex space-x-1">

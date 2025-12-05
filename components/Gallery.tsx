@@ -27,6 +27,8 @@ const Gallery: React.FC = () => {
               <img 
                 src={src} 
                 alt={`Aura Güzellik Salonu ${idx + 1}`} 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto object-cover transform transition-all duration-700 group-hover:scale-110"
                 style={{
                     filter: 'brightness(1.05) contrast(1.05)'
