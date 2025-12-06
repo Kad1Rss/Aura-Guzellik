@@ -141,12 +141,14 @@ const AiConsultant: React.FC = () => {
                  <img 
                    src={AVATAR_IMAGE_URL} 
                    alt="Aura Uzman Asistanı" 
+                   loading="lazy"
                    className="relative w-20 h-20 md:w-24 md:h-24 object-cover drop-shadow-xl hover:scale-105 transition-transform duration-300"
                  />
                  {/* Santa Hat Overlay */}
                  <img 
                     src="https://cdn-icons-png.flaticon.com/512/744/744546.png" 
                     alt="Santa Hat"
+                    loading="lazy"
                     className="absolute -top-6 -right-2 w-12 h-12 transform rotate-12 drop-shadow-md z-20 pointer-events-none"
                  />
                  <div className="absolute bottom-0 right-0 bg-green-500 border-2 border-white w-5 h-5 rounded-full animate-pulse z-10"></div>
@@ -193,13 +195,14 @@ const AiConsultant: React.FC = () => {
 
               <div className="relative">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white border-2 border-rose-200 flex items-center justify-center overflow-hidden p-1">
-                  <img src={AVATAR_IMAGE_URL} alt="Asistan" className="w-full h-full object-cover" />
+                  <img src={AVATAR_IMAGE_URL} alt="Asistan" className="w-full h-full object-cover" loading="lazy" />
                 </div>
                  {/* Mini Hat for Chat Header */}
                  <img 
                     src="https://cdn-icons-png.flaticon.com/512/744/744546.png" 
                     className="absolute -top-3 -right-2 w-8 h-8 transform rotate-6 z-20 pointer-events-none"
                     alt="hat"
+                    loading="lazy"
                  />
                 <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-white rounded-full"></div>
               </div>

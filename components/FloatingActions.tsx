@@ -1,5 +1,5 @@
 import React from 'react';
-import { INSTAGRAM_LINK, WHATSAPP_LINK, PHONE_LINK } from '../constants';
+import { WHATSAPP_LINK, PHONE_LINK } from '../constants';
 
 const FloatingActions: React.FC = () => {
   return (
@@ -35,25 +35,6 @@ const FloatingActions: React.FC = () => {
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white md:w-8 md:h-8">
           <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-        </svg>
-      </a>
-
-      {/* Instagram Button */}
-      <a
-        href={INSTAGRAM_LINK}
-        target="_blank"
-        rel="noreferrer"
-        className="group flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 rounded-full shadow-xl hover:scale-110 transition-all duration-300 relative"
-        aria-label="Instagram"
-      >
-        {/* Tooltip updated to encourage following */}
-        <div className="hidden md:block absolute right-full mr-3 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-bold">
-          Instagram'da Takip Et
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white md:w-7 md:h-7">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
         </svg>
       </a>
     </div>
