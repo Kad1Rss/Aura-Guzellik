@@ -11,8 +11,11 @@ import ChristmasCampaignModal from './components/ChristmasCampaignModal';
 import { SERVICES, TESTIMONIALS } from './constants';
 
 const App: React.FC = () => {
-  // SİTE AÇILIR AÇILMAZ KAMPANYA GÖZÜKSÜN (Default: true)
-  const [isCampaignOpen, setIsCampaignOpen] = useState(true);
+  // Kampanya başlangıçta kapalı
+  const [isCampaignOpen, setIsCampaignOpen] = useState(false);
+  // Otomatik gösterim yapıldı mı kontrolü (Tekrar tekrar açılmasın diye)
+  const [hasAutoShown, setHasAutoShown] = useState(false);
+  
   const [bgIcons, setBgIcons] = useState<any[]>([]);
 
   // Random Christmas Background Generator
@@ -39,6 +42,33 @@ const App: React.FC = () => {
     }));
     setBgIcons(newIcons);
   }, []);
+
+  // Scroll Tabanlı Modal Tetikleyici
+  useEffect(() => {
+    const handleScroll = () => {
+      // Eğer daha önce otomatik gösterildiyse tekrar hesaplama yapma
+      if (hasAutoShown) return;
+
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = scrollTop / docHeight;
+
+      // Sayfanın %35'ine gelindiğinde tetikle (Kullanıcı içeriğe ilgi gösterdiğinde)
+      if (scrollPercent > 0.35) {
+        setIsCampaignOpen(true);
+        setHasAutoShown(true); // Bir daha otomatik açılmasını engelle
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasAutoShown]);
+
+  // Manuel açma fonksiyonu (Hero butonuna tıklandığında)
+  const handleManualOpen = () => {
+    setIsCampaignOpen(true);
+    setHasAutoShown(true); // Manuel açıldıysa da otomatik tetikleyiciyi iptal et
+  };
 
   return (
     <div className="min-h-screen bg-rose-50 font-sans text-gray-800 selection:bg-rose-200 selection:text-rose-900 relative overflow-x-hidden">
@@ -77,7 +107,7 @@ const App: React.FC = () => {
 
       {/* Hero Bölümü - with Campaign Trigger */}
       <div className="relative z-10">
-        <Hero onOpenCampaign={() => setIsCampaignOpen(true)} />
+        <Hero onOpenCampaign={handleManualOpen} />
       </div>
 
       <main className="relative z-10">
