@@ -1,13 +1,12 @@
-import { GoogleGenAI } from "@google/genai";
 
-// İstemciyi (Client) global değil, ihtiyaç duyulduğunda oluşturmak için değişken tanımlıyoruz.
-// Bu, uygulamanın açılışta "process is not defined" hatası verip çökmesini engeller.
+import { GoogleGenAI } from "@google/genai";
+import { ConsultantMessage } from "../types";
+
 let ai: GoogleGenAI | null = null;
 
 const getAiClient = () => {
   if (ai) return ai;
 
-  // Güvenli API Anahtarı okuma (Vite/Vercel ve Local uyumlu)
   let apiKey = '';
   try {
     // @ts-ignore
@@ -15,22 +14,18 @@ const getAiClient = () => {
       // @ts-ignore
       apiKey = import.meta.env.VITE_API_KEY;
     }
-  } catch (e) {
-    // import.meta hatası yutulur
-  }
+  } catch (e) {}
 
   if (!apiKey) {
     try {
       if (typeof process !== 'undefined' && process.env) {
         apiKey = process.env.API_KEY || '';
       }
-    } catch (e) {
-      // process hatası yutulur
-    }
+    } catch (e) {}
   }
 
   if (!apiKey) {
-    console.error("API Anahtarı Bulunamadı! Lütfen Vercel ayarlarından VITE_API_KEY eklediğinizden emin olun.");
+    console.error("API Anahtarı Bulunamadı!");
     return null;
   }
 
@@ -38,47 +33,41 @@ const getAiClient = () => {
   return ai;
 };
 
-export const getBeautyAdvice = async (userQuery: string): Promise<string> => {
+export const getBeautyAdvice = async (history: ConsultantMessage[]): Promise<string> => {
   try {
     const client = getAiClient();
-    
-    if (!client) {
-      return "Sistem şu an güncelleniyor, ama Hülya Hanım sana WhatsApp'tan hemen yardımcı olur: 0546 618 30 62";
-    }
+    if (!client) return "Hülya Hanım WhatsApp'ta seni bekliyor 📞 0546 618 30 62";
+
+    const contents = history.map(msg => ({
+      role: msg.role === 'user' ? 'user' : 'model',
+      parts: [{ text: msg.text }]
+    }));
+
+    const turnCount = history.filter(m => m.role === 'user').length;
 
     const response = await client.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: userQuery,
+      model: 'gemini-3-flash-preview',
+      contents: contents,
       config: {
-        systemInstruction: `Sen Aura Güzellik Merkezi'nin en yakın arkadaş tadındaki, samimi ve bilgili asistanısın.
+        systemInstruction: `Sen Aura Güzellik Merkezi'nin samimi ve uzman asistanısın. Mobil kullanıcılar için kısa, öz ve etkili konuşmalısın.
 
-        KURALLARIN:
-        1. BASİT VE SAMİMİ OL: Tıbbi terim kullanma. "Enflamasyon" deme, "Kızarıklık/Şişlik" de. Sanki 20 yıllık arkadaşınla kahve içerken konuşuyorsun.
-        2. SORUNUN KAYNAĞINA İN: Direkt "gel yapalım" deme. Önce sorunun neden olduğunu (stres, hormonlar, yanlış bakım, mevsim geçişi vb.) bir cümleyle açıkla.
-        3. FAYDALI OL: Evde uygulayabileceği çok basit bir tüyo ver ki sana güvensin.
+        TEMEL KURALLAR:
+        1. CEVAP BOYUTU: Cevapların çok kısa olmalı. Mobil ekranda tek seferde okunabilmeli. Gereksiz cümle kurma.
+        2. FİYAT YASAKTIR: Fiyat sorulursa "İşleme göre değişiyor canım ✨" de ve konuyu değiştir.
+        3. SORU SOR: Kullanıcıya her zaman bir soru yönelt (Örn: "Daha önce yaptırdın mı?", "Hangi bölgeyi düşünüyorsun 🌸?").
+        4. EMOJİ: Sadece kelime aralarında 1-2 tane ilgili emoji kullan.
+        5. RANDEVU: Randevu linkini sadece fiyat sorulursa veya 4. mesajdan sonra paylaş. Hülya Hanım vurgusunu yap.
+        6. ÜSLUP: Samimi ol ama "Sefalar getirdin" gibi ağır ifadeler kullanma. "Merhaba canım" yeterli.
 
-        CEVAP ŞABLONUN (Bu sırayı takip et):
-        
-        1. ADIM (Empati & Sebep): "Ah canım, o sorun hepimizde oluyor! Genelde [SEBEP] yüzünden cildimiz/tüylerimiz böyle tepki verir."
-        2. ADIM (Basit Çözüm): "Evde şuna dikkat edebilirsin: [BASİT İPUCU]. Bu seni biraz rahatlatır."
-        3. ADIM (Profesyonel Yönlendirme): "Ama tamamen pürüzsüz ve kalıcı bir sonuç istersen, bunu profesyonel cihazlarla kökten çözmemiz en güzeli olur."
-        4. ADIM (SEÇENEKLİ KAPANIŞ - BURASI ÇOK ÖNEMLİ):
-        Lafı uzatmadan şu 3 seçeneği sunarak bitir. Telefon numarasını tam olarak "0546 618 30 62" şeklinde yaz ki tıklanabilsin:
-
-        "Karar senin tatlım;
-        👉 İstersen Instagram sayfamızdan (@auraguzellikmerkezi01) yaptığımız harika değişimlere bir göz at: https://www.instagram.com/auraguzellikmerkezi01/
-        📞 Aklına takılan bir şey varsa bizi hemen ara: 0546 618 30 62
-        💬 Veya direkt randevu ve fiyat için WhatsApp'tan mesaj at, Hülya Hanım sana dönüş yapsın: https://api.whatsapp.com/send/?phone=905466183062&text&type=phone_number&app_absent=0"
-
-        LİNKLERİ VE NUMARAYI MUTLAKA BU ŞEKİLDE PAYLAŞ.
-        `,
+        İLETİŞİM:
+        📲 WhatsApp & Hülya Hanım: https://api.whatsapp.com/send/?phone=905466183062&text=Merhaba%20randevu%20istiyorum`,
         thinkingConfig: { thinkingBudget: 0 }, 
       },
     });
 
-    return response.text || "Şu an bağlantıda ufak bir kopukluk oldu ama Hülya Hanım WhatsApp'ta seni bekliyor! 📞 0546 618 30 62";
+    return response.text || "WhatsApp'tan bize ulaşabilirsin 📞 0546 618 30 62";
   } catch (error) {
     console.error("Gemini Error:", error);
-    return "Şu an cevap veremiyorum canım ama WhatsApp'tan yazarsan Hülya Hanım hemen döner: 0546 618 30 62";
+    return "WhatsApp'tan yazarsan hemen yardımcı oluruz 📞 0546 618 30 62";
   }
 };

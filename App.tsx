@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Hero from './components/Hero';
 import ServiceCard from './components/ServiceCard';
@@ -11,77 +12,64 @@ import ChristmasCampaignModal from './components/ChristmasCampaignModal';
 import { SERVICES, TESTIMONIALS } from './constants';
 
 const App: React.FC = () => {
-  // Kampanya başlangıçta kapalı
   const [isCampaignOpen, setIsCampaignOpen] = useState(false);
-  // Otomatik gösterim yapıldı mı kontrolü (Tekrar tekrar açılmasın diye)
   const [hasAutoShown, setHasAutoShown] = useState(false);
-  
   const [bgIcons, setBgIcons] = useState<any[]>([]);
 
-  // Random Christmas Background Generator
   useEffect(() => {
     const icons = [
-      "https://cdn-icons-png.flaticon.com/512/3799/3799971.png", // Santa
-      "https://cdn-icons-png.flaticon.com/512/2316/2316668.png", // Tree
-      "https://cdn-icons-png.flaticon.com/512/629/629546.png",   // Gift
-      "https://cdn-icons-png.flaticon.com/512/1694/1694364.png", // Bell
-      "https://cdn-icons-png.flaticon.com/512/1663/1663022.png", // Candy
-      "https://cdn-icons-png.flaticon.com/512/864/864757.png",    // Sock
-      "https://cdn-icons-png.flaticon.com/512/614/614131.png"     // Reindeer
+      "https://cdn-icons-png.flaticon.com/512/3799/3799971.png",
+      "https://cdn-icons-png.flaticon.com/512/2316/2316668.png",
+      "https://cdn-icons-png.flaticon.com/512/629/629546.png",
+      "https://cdn-icons-png.flaticon.com/512/1694/1694364.png",
+      "https://cdn-icons-png.flaticon.com/512/1663/1663022.png",
+      "https://cdn-icons-png.flaticon.com/512/864/864757.png",
+      "https://cdn-icons-png.flaticon.com/512/614/614131.png"
     ];
     
-    // Performance Update: Reduced count from 25 to 15 to improve DOM rendering on mobile
     const newIcons = Array.from({ length: 15 }).map((_, i) => ({
       id: i,
       src: icons[Math.floor(Math.random() * icons.length)],
-      top: Math.random() * 100, // Random vertical position %
-      left: Math.random() * 100, // Random horizontal position %
-      size: Math.random() * 50 + 30, // Random size between 30px and 80px
-      rotation: Math.random() * 360, // Random rotation
-      opacity: Math.random() * 0.08 + 0.04 // Random opacity between 0.04 and 0.12 (Subtle)
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      size: Math.random() * 50 + 30,
+      rotation: Math.random() * 360,
+      opacity: Math.random() * 0.08 + 0.04
     }));
     setBgIcons(newIcons);
   }, []);
 
-  // Scroll Tabanlı Modal Tetikleyici
   useEffect(() => {
     const handleScroll = () => {
-      // Eğer daha önce otomatik gösterildiyse tekrar hesaplama yapma
       if (hasAutoShown) return;
-
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrollPercent = scrollTop / docHeight;
-
-      // Sayfanın %35'ine gelindiğinde tetikle (Kullanıcı içeriğe ilgi gösterdiğinde)
       if (scrollPercent > 0.35) {
         setIsCampaignOpen(true);
-        setHasAutoShown(true); // Bir daha otomatik açılmasını engelle
+        setHasAutoShown(true);
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasAutoShown]);
 
-  // Manuel açma fonksiyonu (Hero butonuna tıklandığında)
   const handleManualOpen = () => {
     setIsCampaignOpen(true);
-    setHasAutoShown(true); // Manuel açıldıysa da otomatik tetikleyiciyi iptal et
+    setHasAutoShown(true);
   };
 
   return (
     <div className="min-h-screen bg-rose-50 font-sans text-gray-800 selection:bg-rose-200 selection:text-rose-900 relative overflow-x-hidden">
       
-      {/* --- RANDOM CHRISTMAS BACKGROUND OVERLAY --- */}
-      {/* This layer sits on top of backgrounds but below text content (pointer-events-none) */}
+      {/* Background Icons Overlay */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {bgIcons.map((icon) => (
            <img 
              key={icon.id}
              src={icon.src}
              className="absolute transition-all duration-1000 ease-in-out hover:scale-110"
-             loading="lazy" // Lazy load background icons
+             loading="lazy"
              decoding="async"
              style={{
                top: `${icon.top}%`,
@@ -95,29 +83,14 @@ const App: React.FC = () => {
         ))}
       </div>
 
-      {/* --- CHRISTMAS LIGHTS (CSS Based - High Performance) --- */}
-      <div className="fixed top-0 left-0 w-full overflow-hidden h-12 z-[60] pointer-events-none">
-        <ul className="light-wire">
-          <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-          <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-          <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-          <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-        </ul>
-      </div>
-
-      {/* Hero Bölümü - with Campaign Trigger */}
       <div className="relative z-10">
         <Hero onOpenCampaign={handleManualOpen} />
       </div>
 
       <main className="relative z-10">
-        {/* AI Consultant Section */}
         <AiConsultant />
-
-        {/* New Beauty Tips Section */}
         <BeautyTips />
 
-        {/* Services Section */}
         <section id="services" className="py-12 md:py-24 px-3 md:px-4 max-w-7xl mx-auto">
           <div className="text-center mb-8 md:mb-16">
              <div className="inline-block relative">
@@ -131,7 +104,6 @@ const App: React.FC = () => {
             </p>
           </div>
 
-          {/* Mobile: Grid-cols-2 (side by side), Desktop: Grid-cols-4 */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
             {SERVICES.map((service, index) => (
               <ServiceCard key={service.id} service={service} index={index} />
@@ -139,10 +111,8 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Gallery Section */}
         <Gallery />
 
-        {/* Testimonials Section */}
         <section className="py-16 md:py-24 bg-rose-900 text-white relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
              <div className="absolute w-96 h-96 bg-white rounded-full blur-3xl -top-20 -left-20"></div>
@@ -157,13 +127,10 @@ const App: React.FC = () => {
               <p className="text-rose-200 max-w-2xl mx-auto text-sm md:text-base">Sizlerin mutluluğu bizim en büyük referansımız.</p>
             </div>
             
-            {/* Mobile: Grid-cols-2 (Compact), Desktop: Grid-cols-3 */}
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
               {TESTIMONIALS.map((t) => (
                 <div key={t.id} className="bg-white/10 backdrop-blur-md p-4 md:p-8 rounded-xl md:rounded-2xl border border-white/10 hover:bg-white/20 transition-colors flex flex-col h-full relative group">
-                  {/* Holiday touch: Subtle glow on hover */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-gold-400 to-rose-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
-                  
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-rose-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
                   <div className="relative flex text-yellow-400 mb-2 md:mb-4 scale-75 origin-left md:scale-100">
                     {[...Array(t.rating)].map((_, i) => (
                       <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -171,7 +138,6 @@ const App: React.FC = () => {
                       </svg>
                     ))}
                   </div>
-                  {/* Line clamp to prevent uneven heights on mobile */}
                   <p className="relative italic mb-3 md:mb-6 text-rose-50 text-[11px] md:text-sm leading-relaxed flex-grow line-clamp-4 md:line-clamp-none">"{t.comment}"</p>
                   <div className="relative flex items-center gap-2 md:gap-3 mt-auto">
                      <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-rose-400 flex items-center justify-center text-[10px] md:text-xs font-bold shrink-0 border border-white/50">
@@ -185,15 +151,11 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Contact & Map Section */}
         <Contact />
-
       </main>
 
       <Footer />
       <FloatingActions />
-      
-      {/* Christmas Campaign Modal */}
       <ChristmasCampaignModal 
         isOpen={isCampaignOpen} 
         onClose={() => setIsCampaignOpen(false)} 

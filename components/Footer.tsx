@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { INSTAGRAM_LINK, WHATSAPP_LINK, PHONE_LINK } from '../constants';
 
@@ -5,7 +6,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-rose-950 text-rose-100 pt-0 pb-16 relative">
       
-      {/* SVG Snow Divider Top */}
+      {/* Wave Divider Top */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform -translate-y-[99%]">
           <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-[calc(100%+1.3px)] h-[50px] md:h-[100px]">
               <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#881337"></path>
@@ -18,7 +19,6 @@ const Footer: React.FC = () => {
           <div className="md:col-span-1">
             <h3 className="text-3xl font-serif font-bold text-white mb-6 relative inline-block">
                Aura
-               <span className="absolute -top-3 -right-3 text-2xl animate-spin-slow">❄️</span>
             </h3>
             <p className="text-rose-200/80 leading-relaxed text-sm mb-6">
               Çerkezköy'ün en kapsamlı güzellik merkezi. Uzman Hülya Sel ve deneyimli ekibi ile güzelliğinize profesyonel dokunuşlar yapıyoruz.
@@ -54,14 +54,12 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="md:col-span-2 bg-rose-900/50 p-6 rounded-2xl relative overflow-hidden border border-rose-800/30">
-            {/* Decoration in box */}
              <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full blur-2xl"></div>
 
             <h4 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                Çalışma Saatlerimiz
             </h4>
-            {/* Mobile: grid-cols-1 (Simetrik tek sütun), Desktop: grid-cols-2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3 text-rose-200/90 text-sm md:text-base relative z-10">
                <div className="flex justify-between items-center border-b border-rose-800/50 pb-2"><span>Pazartesi</span> <span className="font-medium tracking-wide">09:00 - 22:00</span></div>
                <div className="flex justify-between items-center border-b border-rose-800/50 pb-2"><span>Salı</span> <span className="font-medium tracking-wide">09:00 - 22:00</span></div>
