@@ -8,12 +8,9 @@ import FloatingActions from './components/FloatingActions';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ChristmasCampaignModal from './components/ChristmasCampaignModal';
 import { SERVICES, TESTIMONIALS } from './constants';
 
 const App: React.FC = () => {
-  const [isCampaignOpen, setIsCampaignOpen] = useState(false);
-  const [hasAutoShown, setHasAutoShown] = useState(false);
   const [bgIcons, setBgIcons] = useState<any[]>([]);
 
   useEffect(() => {
@@ -38,26 +35,6 @@ const App: React.FC = () => {
     }));
     setBgIcons(newIcons);
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (hasAutoShown) return;
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrollPercent = scrollTop / docHeight;
-      if (scrollPercent > 0.35) {
-        setIsCampaignOpen(true);
-        setHasAutoShown(true);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasAutoShown]);
-
-  const handleManualOpen = () => {
-    setIsCampaignOpen(true);
-    setHasAutoShown(true);
-  };
 
   return (
     <div className="min-h-screen bg-rose-50 font-sans text-gray-800 selection:bg-rose-200 selection:text-rose-900 relative overflow-x-hidden">
@@ -84,7 +61,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="relative z-10">
-        <Hero onOpenCampaign={handleManualOpen} />
+        <Hero />
       </div>
 
       <main className="relative z-10">
@@ -95,7 +72,6 @@ const App: React.FC = () => {
           <div className="text-center mb-8 md:mb-16">
              <div className="inline-block relative">
                  <span className="text-rose-500 font-semibold tracking-widest uppercase text-xs md:text-sm relative z-10">Sizin İçin En İyisi</span>
-                 <div className="absolute -top-4 -right-6 text-2xl animate-bounce">🎁</div>
              </div>
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mt-2 mb-4">Özel Hizmetlerimiz</h2>
             <div className="w-16 md:w-24 h-1 bg-rose-500 mx-auto rounded-full"></div>
@@ -156,10 +132,6 @@ const App: React.FC = () => {
 
       <Footer />
       <FloatingActions />
-      <ChristmasCampaignModal 
-        isOpen={isCampaignOpen} 
-        onClose={() => setIsCampaignOpen(false)} 
-      />
     </div>
   );
 };

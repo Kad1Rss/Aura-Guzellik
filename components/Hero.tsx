@@ -2,11 +2,7 @@
 import React from 'react';
 import { WHATSAPP_LINK, HERO_IMAGE_URL } from '../constants';
 
-interface HeroProps {
-  onOpenCampaign: () => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ onOpenCampaign }) => {
+const Hero: React.FC = () => {
   
   const scrollToServices = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -32,52 +28,32 @@ const Hero: React.FC<HeroProps> = ({ onOpenCampaign }) => {
             ✨ Güzelliğinize Değer Katın
           </div>
           
-          <h1 className="text-3xl md:text-6xl lg:text-7xl font-serif text-rose-950 font-bold drop-shadow-sm mb-2 md:mb-4 leading-[1.1] animate-fade-in-up delay-100">
+          <h1 className="text-3xl md:text-6xl lg:text-7xl font-serif text-rose-950 font-bold drop-shadow-sm mb-4 md:mb-6 leading-[1.1] animate-fade-in-up delay-100">
             Aura <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-rose-400">Güzellik Merkezi</span>
           </h1>
           
-          <p className="text-sm md:text-xl text-gray-700 font-medium mb-4 md:mb-6 max-w-lg animate-fade-in-up delay-200 leading-relaxed px-2 md:px-0">
+          <p className="text-base md:text-xl text-gray-700 font-medium mb-8 md:mb-10 max-w-lg animate-fade-in-up delay-200 leading-relaxed px-2 md:px-0">
             Işıltınızla büyüleyin, Auranızı yükseltin. <br/>
             <span className="text-rose-800 font-bold mt-1 block">Uzman Hülya Sel Yönetiminde</span>
           </p>
-
-          <div 
-             onClick={onOpenCampaign}
-             className="w-full max-w-md bg-gradient-to-r from-rose-700 to-rose-900 rounded-2xl p-4 mb-6 md:mb-8 cursor-pointer shadow-xl hover:scale-105 transition-transform duration-300 relative group animate-fade-in-up delay-200 border border-rose-100"
-          >
-             <div className="absolute -top-3 -right-3 bg-white text-rose-600 rounded-full p-2 shadow-lg animate-bounce">
-                ✨
-             </div>
-             <div className="flex items-center gap-3">
-                <div className="text-4xl">🎁</div>
-                <div className="text-left">
-                   <h3 className="text-white font-bold text-lg md:text-xl leading-none mb-1">
-                     Size Özel Fırsatlar Burada!
-                   </h3>
-                   <p className="text-rose-100 text-xs md:text-sm leading-tight">
-                     Kampanyalı paketlerimizi ve hediye işlemlerimizi incelemek için hemen tıklayın. &rarr;
-                   </p>
-                </div>
-             </div>
-          </div>
           
-          <div className="flex flex-col w-full sm:w-auto sm:flex-row gap-3 md:gap-3 animate-fade-in-up delay-300 px-4 md:px-0">
+          <div className="flex flex-col w-full sm:w-auto sm:flex-row gap-3 md:gap-4 animate-fade-in-up delay-300 px-4 md:px-0">
             <a 
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noreferrer"
-              className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-green-700 to-green-600 text-white font-bold rounded-full shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 text-base md:text-lg ring-2 ring-green-200 ring-offset-2"
+              className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-green-700 to-green-600 text-white font-bold rounded-full shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 text-base md:text-lg ring-2 ring-green-200 ring-offset-2"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
               </svg>
-              <span>Randevu Al</span>
+              <span>Hemen Randevu Al</span>
             </a>
             
             <button 
               onClick={scrollToServices}
-              className="w-full sm:w-auto px-6 py-3 bg-white/80 backdrop-blur-sm text-rose-900 font-semibold rounded-full shadow-lg hover:bg-white active:scale-95 transition-all border border-rose-200 text-center cursor-pointer text-base md:text-lg sm:mt-0 mt-1"
+              className="w-full sm:w-auto px-8 py-4 bg-white/80 backdrop-blur-sm text-rose-900 font-semibold rounded-full shadow-lg hover:bg-white active:scale-95 transition-all border border-rose-200 text-center cursor-pointer text-base md:text-lg sm:mt-0 mt-1"
             >
               Hizmetleri İncele
             </button>

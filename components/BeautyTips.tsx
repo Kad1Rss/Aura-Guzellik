@@ -1,7 +1,17 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { BEAUTY_TIPS } from '../constants';
 
 const BeautyTips: React.FC = () => {
+  const [expandedTips, setExpandedTips] = useState<Record<string, boolean>>({});
+
+  const toggleTip = (id: string) => {
+    setExpandedTips(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
   return (
     <section className="py-12 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-3 md:px-4">
@@ -16,7 +26,7 @@ const BeautyTips: React.FC = () => {
           {BEAUTY_TIPS.map((tip) => (
             <div 
               key={tip.id} 
-              className="group bg-white rounded-xl p-3 md:p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden flex flex-col"
+              className="group bg-white rounded-xl p-3 md:p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden flex flex-col h-full"
             >
               <div className={`absolute top-0 right-0 px-2 py-1 md:px-3 ${tip.color} text-gray-600 text-[10px] md:text-xs font-bold rounded-bl-lg`}>
                 {tip.tag}
@@ -27,9 +37,23 @@ const BeautyTips: React.FC = () => {
               <h3 className="text-sm md:text-xl font-bold text-gray-800 mb-1 md:mb-2 group-hover:text-rose-600 transition-colors line-clamp-1">
                 {tip.title}
               </h3>
-              <p className="text-gray-600 text-[11px] md:text-sm leading-tight md:leading-relaxed line-clamp-4 md:line-clamp-none">
+              <p className={`text-gray-600 text-[11px] md:text-sm leading-tight md:leading-relaxed transition-all duration-300 ${
+                expandedTips[tip.id] ? '' : 'line-clamp-4 md:line-clamp-none'
+              }`}>
                 {tip.description}
               </p>
+              
+              {/* Devamını Oku Button - Only Mobile */}
+              <button 
+                onClick={() => toggleTip(tip.id)}
+                className="md:hidden mt-2 text-rose-500 font-bold text-[10px] text-left flex items-center gap-1 active:opacity-70"
+              >
+                {expandedTips[tip.id] ? (
+                  <>Daha Az Gör <span className="rotate-180 transition-transform">▼</span></>
+                ) : (
+                  <>Devamını Oku <span>▼</span></>
+                )}
+              </button>
             </div>
           ))}
         </div>
