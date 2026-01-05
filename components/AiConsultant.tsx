@@ -30,7 +30,7 @@ const AiConsultant: React.FC = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, loading]);
 
   useEffect(() => {
     const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
@@ -54,10 +54,16 @@ const AiConsultant: React.FC = () => {
     setMessages(currentMessages);
     setLoading(true);
 
+    // API çağrısını yap
     const advice = await getBeautyAdvice(currentMessages);
     
-    setMessages(prev => [...prev, { role: 'model', text: advice }]);
-    setLoading(false);
+    // Doğal bir bekleme süresi ekle (İnsancıl yanıt hızı)
+    const typingDelay = Math.max(1500, Math.min(3000, advice.length * 20));
+    
+    setTimeout(() => {
+      setMessages(prev => [...prev, { role: 'model', text: advice }]);
+      setLoading(false);
+    }, typingDelay);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
@@ -92,10 +98,8 @@ const AiConsultant: React.FC = () => {
 
   return (
     <section className="py-12 md:py-24 bg-rose-50/10 w-full overflow-hidden flex flex-col items-center">
-      {/* Container - Web'de geniş, mobil de tam ekran */}
       <div className="w-full max-w-7xl mx-auto px-2 md:px-6">
         
-        {/* Zarif Başlık Alanı */}
         <div className="w-full text-center mb-8 md:mb-12">
           <div className="inline-flex items-center gap-3 bg-white px-6 py-2 rounded-full shadow-sm border border-rose-100 mb-6">
              <div className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></div>
@@ -105,10 +109,8 @@ const AiConsultant: React.FC = () => {
           <p className="text-gray-500 text-sm md:text-xl font-medium max-w-2xl mx-auto">Uzman Hülya Sel tecrübesiyle merak ettiğiniz tüm işlemleri yanıtlıyoruz.</p>
         </div>
 
-        {/* Ana Chat Kabini - Sayfaya Ortalanmış ve Belirgin */}
         <div className="w-full bg-white rounded-[2rem] md:rounded-[3.5rem] border-2 md:border-4 border-rose-100 flex flex-col h-[500px] md:h-[720px] shadow-[0_30px_60px_-15px_rgba(255,228,230,0.6)] overflow-hidden relative">
           
-          {/* Üst Bilgi Çubuğu */}
           <div className="bg-white border-b border-rose-50 p-5 md:p-8 flex items-center justify-between">
              <div className="flex items-center gap-4 md:gap-6">
                 <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-rose-50 p-1 border-2 border-rose-100 shadow-sm overflow-hidden">
@@ -118,17 +120,12 @@ const AiConsultant: React.FC = () => {
                    <h3 className="text-gray-900 font-bold text-lg md:text-2xl">Canlı Güzellik Danışmanı</h3>
                    <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                      <span className="text-[10px] md:text-xs text-rose-400 font-bold uppercase tracking-widest">Çevrimiçi & Hazır</span>
+                      <span className="text-[10px] md:text-xs text-rose-400 font-bold uppercase tracking-widest">Şu an yazıyor...</span>
                    </div>
                 </div>
              </div>
-             <div className="hidden lg:flex gap-3">
-                <div className="px-5 py-2 bg-rose-50/50 rounded-full text-rose-800 text-xs font-bold border border-rose-100">Uzman Rehberliği</div>
-                <div className="px-5 py-2 bg-rose-50/50 rounded-full text-rose-800 text-xs font-bold border border-rose-100">Hızlı Yanıt</div>
-             </div>
           </div>
 
-          {/* Mesajlaşma Sahası */}
           <div className="flex-1 overflow-y-auto p-5 md:p-12 space-y-6 md:space-y-10 bg-white hide-scrollbar scroll-smooth">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in-up`}>
@@ -143,19 +140,25 @@ const AiConsultant: React.FC = () => {
                 </div>
               </div>
             ))}
+            
             {loading && (
-              <div className="flex justify-start">
-                <div className="bg-rose-50 p-4 px-6 rounded-full border border-rose-100 flex gap-1.5">
-                  <div className="w-2.5 h-2.5 bg-rose-300 rounded-full animate-bounce"></div>
-                  <div className="w-2.5 h-2.5 bg-rose-300 rounded-full animate-bounce delay-100"></div>
-                  <div className="w-2.5 h-2.5 bg-rose-300 rounded-full animate-bounce delay-200"></div>
+              <div className="flex justify-start items-center gap-4 animate-fade-in-up">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-rose-50 border border-rose-100 p-1 overflow-hidden shrink-0">
+                  <img src={AVATAR_IMAGE_URL} alt="Yazıyor" className="w-full h-full object-cover opacity-50" />
+                </div>
+                <div className="bg-rose-50/50 px-6 py-4 rounded-3xl rounded-tl-none border border-rose-100 flex items-center gap-2">
+                  <span className="text-xs md:text-sm font-bold text-rose-400 italic">Uzmanımız yazıyor</span>
+                  <div className="flex gap-1">
+                    <div className="w-1.5 h-1.5 bg-rose-300 rounded-full animate-bounce"></div>
+                    <div className="w-1.5 h-1.5 bg-rose-300 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-1.5 h-1.5 bg-rose-300 rounded-full animate-bounce delay-200"></div>
+                  </div>
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Öneri Soruları - Zarif Çipler */}
           <div className="px-5 md:px-12 py-5 bg-white border-t border-rose-50 overflow-x-auto whitespace-nowrap hide-scrollbar">
             <div className="flex gap-3 md:gap-4">
               {displayQuestions.map((q, idx) => (
@@ -172,7 +175,6 @@ const AiConsultant: React.FC = () => {
             </div>
           </div>
 
-          {/* Giriş Alanı - Geniş ve Temiz */}
           <form onSubmit={(e) => handleAsk(e)} className="p-5 md:p-12 bg-white border-t border-rose-50">
             <div className="relative flex items-center gap-4 max-w-5xl mx-auto">
               <input
@@ -195,7 +197,6 @@ const AiConsultant: React.FC = () => {
           </form>
         </div>
 
-        {/* Dipnot */}
         <div className="mt-10 text-center text-rose-300 font-semibold text-sm md:text-base uppercase tracking-widest flex items-center justify-center gap-4">
            <div className="h-px w-12 bg-rose-100"></div>
            Aura Güzellik | Profesyonel Bakım
