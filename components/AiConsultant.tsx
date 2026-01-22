@@ -15,7 +15,9 @@ const AiConsultant: React.FC = () => {
       text: 'Merhaba canım, Aura Güzellik Merkezi asistan paneline hoş geldin. Bugün senin güzelliğin için neler yapabiliriz? Merak ettiğin her şeyi bana sorabilirsin.' 
     }
   ]);
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const questionPool = [
     "Düğünüm var, en hızlı bakım hangisi? 💍",
@@ -38,7 +40,13 @@ const AiConsultant: React.FC = () => {
   }, []);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      const { scrollHeight, clientHeight } = chatContainerRef.current;
+      chatContainerRef.current.scrollTo({
+        top: scrollHeight - clientHeight,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const handleAsk = async (e?: React.FormEvent, overrideQuery?: string) => {
@@ -52,18 +60,26 @@ const AiConsultant: React.FC = () => {
     
     setQuery('');
     setMessages(currentMessages);
-    setLoading(true);
+    
+    // Gecikmeli 'Yazıyor' Başlatma (Düşünme Efekti)
+    // Hemen loading yapmıyoruz, sanki önce okuyor gibi 800ms-1200ms bekliyoruz.
+    const thinkingDelay = 1000; 
 
-    // API çağrısını yap
-    const advice = await getBeautyAdvice(currentMessages);
-    
-    // Doğal bir bekleme süresi ekle (İnsancıl yanıt hızı)
-    const typingDelay = Math.max(1500, Math.min(3000, advice.length * 20));
-    
-    setTimeout(() => {
-      setMessages(prev => [...prev, { role: 'model', text: advice }]);
-      setLoading(false);
-    }, typingDelay);
+    setTimeout(async () => {
+      setLoading(true);
+
+      // API çağrısını başlat
+      const advice = await getBeautyAdvice(currentMessages);
+      
+      // Mesajın uzunluğuna göre yazma süresi simülasyonu
+      const typingDuration = Math.max(1500, Math.min(3500, advice.length * 15));
+      
+      setTimeout(() => {
+        setMessages(prev => [...prev, { role: 'model', text: advice }]);
+        setLoading(false);
+      }, typingDuration);
+
+    }, thinkingDelay);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
@@ -109,9 +125,9 @@ const AiConsultant: React.FC = () => {
           <p className="text-gray-500 text-sm md:text-xl font-medium max-w-2xl mx-auto">Uzman Hülya Sel tecrübesiyle merak ettiğiniz tüm işlemleri yanıtlıyoruz.</p>
         </div>
 
-        <div className="w-full bg-white rounded-[2rem] md:rounded-[3.5rem] border-2 md:border-4 border-rose-100 flex flex-col h-[500px] md:h-[720px] shadow-[0_30px_60px_-15px_rgba(255,228,230,0.6)] overflow-hidden relative">
+        <div className="w-full bg-white rounded-[2rem] md:rounded-[3.5rem] border-2 md:border-4 border-rose-100 flex flex-col h-[550px] md:h-[750px] shadow-[0_30px_60px_-15px_rgba(255,228,230,0.6)] overflow-hidden relative">
           
-          <div className="bg-white border-b border-rose-50 p-5 md:p-8 flex items-center justify-between">
+          <div className="bg-white border-b border-rose-50 p-5 md:p-8 flex items-center justify-between z-10">
              <div className="flex items-center gap-4 md:gap-6">
                 <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-rose-50 p-1 border-2 border-rose-100 shadow-sm overflow-hidden">
                    <img src={AVATAR_IMAGE_URL} alt="Avatar" className="w-full h-full object-cover" />
@@ -119,14 +135,19 @@ const AiConsultant: React.FC = () => {
                 <div>
                    <h3 className="text-gray-900 font-bold text-lg md:text-2xl">Canlı Güzellik Danışmanı</h3>
                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                      <span className="text-[10px] md:text-xs text-rose-400 font-bold uppercase tracking-widest">Şu an yazıyor...</span>
+                      <span className={`w-2 h-2 rounded-full ${loading ? 'bg-orange-400 animate-pulse' : 'bg-green-500'}`}></span>
+                      <span className="text-[10px] md:text-xs text-rose-400 font-bold uppercase tracking-widest">
+                        {loading ? 'Şu an yazıyor...' : 'Çevrimiçi & Hazır'}
+                      </span>
                    </div>
                 </div>
              </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-5 md:p-12 space-y-6 md:space-y-10 bg-white hide-scrollbar scroll-smooth">
+          <div 
+            ref={chatContainerRef}
+            className="flex-1 overflow-y-auto p-5 md:p-12 space-y-6 md:space-y-10 bg-white hide-scrollbar scroll-smooth relative"
+          >
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in-up`}>
                 <div 
@@ -142,7 +163,7 @@ const AiConsultant: React.FC = () => {
             ))}
             
             {loading && (
-              <div className="flex justify-start items-center gap-4 animate-fade-in-up">
+              <div className="flex justify-start items-center gap-4 animate-fade-in-up pb-4">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-rose-50 border border-rose-100 p-1 overflow-hidden shrink-0">
                   <img src={AVATAR_IMAGE_URL} alt="Yazıyor" className="w-full h-full object-cover opacity-50" />
                 </div>
@@ -156,7 +177,7 @@ const AiConsultant: React.FC = () => {
                 </div>
               </div>
             )}
-            <div ref={messagesEndRef} />
+            <div ref={messagesEndRef} className="h-2" />
           </div>
 
           <div className="px-5 md:px-12 py-5 bg-white border-t border-rose-50 overflow-x-auto whitespace-nowrap hide-scrollbar">
@@ -175,7 +196,7 @@ const AiConsultant: React.FC = () => {
             </div>
           </div>
 
-          <form onSubmit={(e) => handleAsk(e)} className="p-5 md:p-12 bg-white border-t border-rose-50">
+          <form onSubmit={(e) => handleAsk(e)} className="p-5 md:p-12 bg-white border-t border-rose-50 z-10">
             <div className="relative flex items-center gap-4 max-w-5xl mx-auto">
               <input
                 type="text"
