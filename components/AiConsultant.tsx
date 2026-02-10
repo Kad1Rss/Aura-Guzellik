@@ -20,14 +20,22 @@ const AiConsultant: React.FC = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const questionPool = [
-    "Düğünüm var, en hızlı bakım hangisi? 💍",
-    "Acısız buz lazer mümkün mü? ❄️",
-    "Leke protokolü kaç seans sürer? 🧪",
-    "Gıdımdan nasıl kurtulurum? 🪄",
-    "İpek kirpik kirpiklerimi döker mi? 🦋",
-    "Hülya Hanım'ın sırrı nedir? 🤫",
-    "Bölgesel incelme gerçekten işe yarar mı? 📏",
-    "Dudak renklendirme doğal durur mu? 💋"
+    "Hülya Sel imzalı 'Aura Glow' bakımı nedir? ✨",
+    "Cam cilt (Glass Skin) için hangi protokol uygun? 💎",
+    "Acısız buz lazer ile yaza hazır mıyım? ❄️",
+    "Somon DNA aşısı cildi gençleştirir mi? 🧬",
+    "Dudak renklendirmede hangi tonlar trend? 💋",
+    "Gıdı eritme ve çene hattı (Jawline) mümkün mü? 🪄",
+    "İpek kirpik mi yoksa kirpik lifting mi yaptırmalıyım? 🦋",
+    "Kaş laminasyonu ile doğal kalkık kaşlar ne kadar sürer? 👁️",
+    "Bölgesel incelmede G5 masajı kaç seans önerilir? 📏",
+    "Dermapen ile gözeneklerimden kurtulabilir miyim? 💉",
+    "Düğün paketi hazırlıklarına ne zaman başlamalıyım? 👰",
+    "Microblading sonrası bakım nasıl olmalı? 🎨",
+    "Leke protokolü ile güneş lekelerinden kurtulur muyum? 🧪",
+    "Hülya Hanım'ın en çok önerdiği cilt bakımı hangisi? 🤫",
+    "Tırnak sanatında (Nail Art) bu sezon ne moda? 💅",
+    "HydraFacial sonrası cildim ne kadar süre parlar? 💧"
   ];
 
   useEffect(() => {
@@ -35,8 +43,9 @@ const AiConsultant: React.FC = () => {
   }, [messages, loading]);
 
   useEffect(() => {
+    // Rastgele 6 soru seç
     const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
-    setDisplayQuestions(shuffled.slice(0, 5));
+    setDisplayQuestions(shuffled.slice(0, 6));
   }, []);
 
   const scrollToBottom = () => {
@@ -61,17 +70,14 @@ const AiConsultant: React.FC = () => {
     setQuery('');
     setMessages(currentMessages);
     
-    // Gecikmeli 'Yazıyor' Başlatma (Düşünme Efekti)
-    // Hemen loading yapmıyoruz, sanki önce okuyor gibi 800ms-1200ms bekliyoruz.
-    const thinkingDelay = 1000; 
+    // Düşünme Efekti (Sanki soruyu okuyor gibi)
+    const thinkingDelay = 1200; 
 
     setTimeout(async () => {
       setLoading(true);
 
-      // API çağrısını başlat
       const advice = await getBeautyAdvice(currentMessages);
       
-      // Mesajın uzunluğuna göre yazma süresi simülasyonu
       const typingDuration = Math.max(1500, Math.min(3500, advice.length * 15));
       
       setTimeout(() => {
@@ -180,16 +186,17 @@ const AiConsultant: React.FC = () => {
             <div ref={messagesEndRef} className="h-2" />
           </div>
 
+          {/* Soru Önerileri Alanı */}
           <div className="px-5 md:px-12 py-5 bg-white border-t border-rose-50 overflow-x-auto whitespace-nowrap hide-scrollbar">
-            <div className="flex gap-3 md:gap-4">
+            <div className="flex gap-3 md:gap-4 pb-2">
               {displayQuestions.map((q, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSuggestionClick(q)}
                   disabled={loading}
-                  className="px-6 py-2.5 md:px-8 md:py-3 bg-white hover:bg-rose-50 text-rose-900 rounded-full text-xs md:text-sm font-bold border-2 border-rose-50 hover:border-rose-200 active:scale-95 transition-all shadow-sm flex items-center gap-2"
+                  className="px-6 py-3 md:px-10 md:py-4 bg-white hover:bg-rose-50 text-rose-950 rounded-full text-[13px] md:text-[16px] font-bold border-2 border-rose-100 hover:border-rose-300 active:scale-95 transition-all shadow-md flex items-center gap-2 group shrink-0"
                 >
-                  <span className="text-lg">✨</span>
+                  <span className="text-lg group-hover:scale-125 transition-transform duration-300">✨</span>
                   {q}
                 </button>
               ))}
