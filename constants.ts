@@ -1,3 +1,4 @@
+
 import { Service, Testimonial } from './types';
 
 export interface BeautyTip {
@@ -9,27 +10,26 @@ export interface BeautyTip {
   tag: string;
 }
 
-// İLETİŞİM BİLGİLERİ
-export const WHATSAPP_NUMBER = "905466183062"; // Dinamik link üretimi için ham numara
+// İLETİŞİM BİLGİLERİ (İşletme Devri Sonrası Kurumsal Yapı)
+export const WHATSAPP_NUMBER = "905466183062"; 
 export const PHONE_NUMBER_DISPLAY = "+90 546 618 30 62";
 export const PHONE_LINK = "tel:+905466183062";
 export const WHATSAPP_LINK = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text&type=phone_number&app_absent=0`;
 export const INSTAGRAM_LINK = "https://www.instagram.com/auraguzellikmerkezi01/";
-export const EMAIL_ADDRESS = "selhulya1@gmail.com"; // Güncellenen mail adresi
-// Kullanıcının verdiği ID ile çalışan Google Maps kısa linki
+export const EMAIL_ADDRESS = "selhulya1@gmail.com"; // Form bildirimleri için kullanılan aktif adres
 export const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/SaffBFKYHQxoNmK67"; 
 
-// ANA EKRAN (GİRİŞ) RESMİ - BURADAN DEĞİŞTİREBİLİRSİNİZ
+// ANA EKRAN (GİRİŞ) RESMİ
 export const HERO_IMAGE_URL = "https://i.ibb.co/359JTL8J/header.jpg";
 
 // GALERİ RESİMLERİ
 export const GALLERY_IMAGES = [
-  'https://i.ibb.co/9H878CY6/bekleme-alan.jpg', // Bekleme alanı
-  'https://i.ibb.co/FkRDM6Sm/sedye1.jpg', // Sedye/Oda
-  'https://i.ibb.co/XZcWfbFK/image.jpg', // Tırnak alanı
-  'https://i.ibb.co/ynMCd6C4/cilt-bak-m-1.jpg', // Cilt bakım odası
-  'https://i.ibb.co/9kS2DTqh/dettaylar1.jpg', // Detaylar
-  'https://i.ibb.co/ynVzQz8N/urunler.jpg', // Ürünler
+  'https://i.ibb.co/9H878CY6/bekleme-alan.jpg', 
+  'https://i.ibb.co/FkRDM6Sm/sedye1.jpg', 
+  'https://i.ibb.co/XZcWfbFK/image.jpg', 
+  'https://i.ibb.co/ynMCd6C4/cilt-bak-m-1.jpg', 
+  'https://i.ibb.co/9kS2DTqh/dettaylar1.jpg', 
+  'https://i.ibb.co/ynVzQz8N/urunler.jpg', 
 ];
 
 export const SERVICES: Service[] = [
@@ -174,37 +174,37 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
     name: 'Ayşe Yılmaz',
-    comment: 'Hülya Hanım ve ekibine çok teşekkürler! Lazer epilasyon sonuçlarımdan inanılmaz memnunum. Çerkezköy\'de tek adresim.',
+    comment: 'Aura Güzellik ekibine çok teşekkürler! Lazer epilasyon sonuçlarımdan inanılmaz memnunum. Çerkezköy\'de tek adresim.',
     rating: 5
   },
   {
     id: '2',
     name: 'Selin Kaya',
-    comment: 'Aura Güzellik Merkezi\'nde yaptırdığım cilt bakımı cildime resmen nefes aldırdı. İlgi ve alakaları harika.',
+    comment: 'Merkezde yaptırdığım cilt bakımı cildime resmen nefes aldırdı. İlgi ve alakaları harika.',
     rating: 5
   },
   {
     id: '3',
     name: 'Zeynep Demir',
-    comment: 'İpek kirpik uygulaması için çok endişeliydim ama sonuç o kadar doğal oldu ki... Ellerinize sağlık Hülya Hanım.',
+    comment: 'İpek kirpik uygulaması o kadar doğal oldu ki... Ellerinize sağlık Aura ekibi.',
     rating: 5
   },
   {
     id: '4',
     name: 'Elif Çelik',
-    comment: 'Microblading işlemi yaptırdım, kaşlarım tam istediğim formda oldu. Hijyen konusunda çok titizler, gönül rahatlığıyla gelebilirsiniz.',
+    comment: 'Microblading işlemi yaptırdım, kaşlarım tam istediğim formda oldu. Hijyen konusunda çok titizler.',
     rating: 5
   },
   {
     id: '5',
     name: 'Berna Soylu',
-    comment: 'Gelin bakım paketimi burada yaptırdım. Manikürden saç bakımına her şey kusursuzdu. Stresli günümde bana terapi gibi geldi.',
+    comment: 'Gelin bakım paketimi burada yaptırdım. Manikürden saç bakımına her şey kusursuzdu.',
     rating: 5
   },
   {
     id: '6',
     name: 'Merve Akay',
-    comment: 'Randevu saatlerine çok sadıklar. Pazar günü açık olmaları çalışanlar için büyük avantaj. Teşekkürler Aura Ailesi.',
+    comment: 'Randevu saatlerine çok sadıklar. Pazar günü açık olmaları çalışanlar için büyük avantaj.',
     rating: 4
   }
 ];

@@ -35,7 +35,7 @@ const Hero: React.FC = () => {
           
           <p className="text-base md:text-xl text-gray-700 font-medium mb-8 md:mb-10 max-w-lg animate-fade-in-up delay-200 leading-relaxed px-2 md:px-0">
             Işıltınızla büyüleyin, Auranızı yükseltin. <br/>
-            <span className="text-rose-800 font-bold mt-1 block">Uzman Hülya Sel Yönetiminde</span>
+            <span className="text-rose-800 font-bold mt-1 block">Profesyonel Uzman Kadromuzla</span>
           </p>
           
           <div className="flex flex-col w-full sm:w-auto sm:flex-row gap-3 md:gap-4 animate-fade-in-up delay-300 px-4 md:px-0">
@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
            <div className="relative rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white/80">
              <img 
                src={HERO_IMAGE_URL} 
-               alt="Uzman Hülya Sel ve Aura Güzellik Salonu" 
+               alt="Aura Güzellik Salonu" 
                // @ts-ignore
                fetchPriority="high"
                loading="eager"
@@ -73,8 +73,8 @@ const Hero: React.FC = () => {
              />
              <div className="absolute inset-0 bg-gradient-to-t from-rose-900/40 to-transparent pointer-events-none"></div>
              <div className="absolute bottom-2 left-2 md:bottom-6 md:left-6 bg-white/95 backdrop-blur-md px-3 py-1.5 md:px-6 md:py-4 rounded-lg md:rounded-2xl shadow-lg border-l-2 md:border-l-4 border-rose-500 z-20">
-                <p className="font-serif font-bold text-rose-900 text-sm md:text-xl leading-tight">Hülya Sel</p>
-                <p className="text-[8px] md:text-xs text-rose-500 uppercase tracking-wider font-bold leading-tight">Kurucu & Uzman</p>
+                <p className="font-serif font-bold text-rose-900 text-sm md:text-xl leading-tight">Aura Güzellik</p>
+                <p className="text-[8px] md:text-xs text-rose-500 uppercase tracking-wider font-bold leading-tight">Profesyonel Bakım Merkezi</p>
              </div>
            </div>
         </div>

@@ -20,7 +20,7 @@ const AiConsultant: React.FC = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const questionPool = [
-    "Hülya Sel imzalı 'Aura Glow' bakımı nedir? ✨",
+    "Aura Glow bakımı nedir? ✨",
     "Cam cilt (Glass Skin) için hangi protokol uygun? 💎",
     "Acısız buz lazer ile yaza hazır mıyım? ❄️",
     "Somon DNA aşısı cildi gençleştirir mi? 🧬",
@@ -33,7 +33,7 @@ const AiConsultant: React.FC = () => {
     "Düğün paketi hazırlıklarına ne zaman başlamalıyım? 👰",
     "Microblading sonrası bakım nasıl olmalı? 🎨",
     "Leke protokolü ile güneş lekelerinden kurtulur muyum? 🧪",
-    "Hülya Hanım'ın en çok önerdiği cilt bakımı hangisi? 🤫",
+    "En çok önerilen cilt bakımı hangisi? 🤫",
     "Tırnak sanatında (Nail Art) bu sezon ne moda? 💅",
     "HydraFacial sonrası cildim ne kadar süre parlar? 💧"
   ];
@@ -43,7 +43,6 @@ const AiConsultant: React.FC = () => {
   }, [messages, loading]);
 
   useEffect(() => {
-    // Rastgele 6 soru seç
     const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
     setDisplayQuestions(shuffled.slice(0, 6));
   }, []);
@@ -70,14 +69,11 @@ const AiConsultant: React.FC = () => {
     setQuery('');
     setMessages(currentMessages);
     
-    // Düşünme Efekti (Sanki soruyu okuyor gibi)
     const thinkingDelay = 1200; 
 
     setTimeout(async () => {
       setLoading(true);
-
       const advice = await getBeautyAdvice(currentMessages);
-      
       const typingDuration = Math.max(1500, Math.min(3500, advice.length * 15));
       
       setTimeout(() => {
@@ -128,7 +124,7 @@ const AiConsultant: React.FC = () => {
              <span className="text-rose-900 font-bold text-xs uppercase tracking-[0.2em]">Aura Uzman Hattı</span>
           </div>
           <h2 className="text-3xl md:text-6xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Size Nasıl Yardımcı Olabiliriz?</h2>
-          <p className="text-gray-500 text-sm md:text-xl font-medium max-w-2xl mx-auto">Uzman Hülya Sel tecrübesiyle merak ettiğiniz tüm işlemleri yanıtlıyoruz.</p>
+          <p className="text-gray-500 text-sm md:text-xl font-medium max-w-2xl mx-auto">Aura Güzellik uzmanlığıyla merak ettiğiniz tüm işlemleri yanıtlıyoruz.</p>
         </div>
 
         <div className="w-full bg-white rounded-[2rem] md:rounded-[3.5rem] border-2 md:border-4 border-rose-100 flex flex-col h-[550px] md:h-[750px] shadow-[0_30px_60px_-15px_rgba(255,228,230,0.6)] overflow-hidden relative">
@@ -186,7 +182,6 @@ const AiConsultant: React.FC = () => {
             <div ref={messagesEndRef} className="h-2" />
           </div>
 
-          {/* Soru Önerileri Alanı */}
           <div className="px-5 md:px-12 py-5 bg-white border-t border-rose-50 overflow-x-auto whitespace-nowrap hide-scrollbar">
             <div className="flex gap-3 md:gap-4 pb-2">
               {displayQuestions.map((q, idx) => (

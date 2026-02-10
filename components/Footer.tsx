@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
                Aura
             </h3>
             <p className="text-rose-200/80 leading-relaxed text-sm mb-6">
-              Çerkezköy'ün en kapsamlı güzellik merkezi. Uzman Hülya Sel ve deneyimli ekibi ile güzelliğinize profesyonel dokunuşlar yapıyoruz.
+              Çerkezköy'ün en kapsamlı güzellik merkezi. Profesyonel uzman kadromuz ile güzelliğinize uzman dokunuşlar yapıyoruz.
             </p>
             <div className="flex gap-4">
                <a 
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="text-center text-sm text-rose-200/40">
-          <p>&copy; {new Date().getFullYear()} Aura Güzellik Merkezi - Hülya Sel. Tüm hakları saklıdır.</p>
+          <p>&copy; {new Date().getFullYear()} Aura Güzellik Merkezi. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </footer>
