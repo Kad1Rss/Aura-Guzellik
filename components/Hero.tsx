@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { WHATSAPP_LINK, HERO_IMAGE_URL } from '../constants';
 

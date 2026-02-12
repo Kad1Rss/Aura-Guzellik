@@ -10,13 +10,13 @@ export interface BeautyTip {
   tag: string;
 }
 
-// İLETİŞİM BİLGİLERİ (İşletme Devri Sonrası Kurumsal Yapı)
+// İLETİŞİM BİLGİLERİ (Kurumsal Yapı)
 export const WHATSAPP_NUMBER = "905466183062"; 
 export const PHONE_NUMBER_DISPLAY = "+90 546 618 30 62";
 export const PHONE_LINK = "tel:+905466183062";
 export const WHATSAPP_LINK = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text&type=phone_number&app_absent=0`;
 export const INSTAGRAM_LINK = "https://www.instagram.com/auraguzellikmerkezi01/";
-export const EMAIL_ADDRESS = "selhulya1@gmail.com"; // Form bildirimleri için kullanılan aktif adres
+export const EMAIL_ADDRESS = "auraguzellikcerkezkoy@gmail.com";
 export const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/SaffBFKYHQxoNmK67"; 
 
 // ANA EKRAN (GİRİŞ) RESMİ
@@ -78,7 +78,7 @@ export const SERVICES: Service[] = [
   {
     id: '7',
     title: 'G5 Bölgesel İncelme',
-    description: 'Selülit görünümünü azaltan, sıkılaşma sağlayan ritmik masaj teknolojisi. Daha fit ve pürüzsüz bacaklar için ideal çözüm.',
+    description: 'Selülit görünümünü azaltan, sıkılaşma sağlayan ritmik masaj teknolojisi. Daha fit and pürüzsüz bacaklar için ideal çözüm.',
     imageUrl: 'https://i.ibb.co/jPp6Lsx3/g5.jpg',
     icon: '👙'
   },
@@ -99,7 +99,7 @@ export const SERVICES: Service[] = [
   {
     id: '10',
     title: 'Saç Boyama & Renklendirme',
-    description: 'Saçlarınızı yıpratmadan, en kaliteli boyalarla hayalinizdeki renge kavuşturuyoruz. Ombre, sombre ve balyaj teknikleriyle ışıltılı geçişler.',
+    description: 'Saçlarınıza yıpratmadan, en kaliteli boyalarla hayalinizdeki renge kavuşturuyoruz. Ombre, sombre ve balyaj teknikleriyle ışıltılı geçişler.',
     imageUrl: 'https://i.ibb.co/LdJ9VBFM/sa-boyama.jpg',
     icon: '🎨'
   },
@@ -122,89 +122,105 @@ export const SERVICES: Service[] = [
 export const BEAUTY_TIPS: BeautyTip[] = [
   {
     id: 't1',
-    title: "Pirinç Suyu Mucizesi",
-    description: "Koreli kadınların porselen gibi cildinin sırrı! Pirinci suda bekletip o suyu tonik olarak kullanırsanız, cilt lekelerinizin açıldığını ve yüzünüzün parladığını göreceksiniz. Haftada 3 gün deneyin!",
-    icon: "🍚",
-    color: "bg-stone-50 text-stone-600",
-    tag: "Kore Sırrı"
+    title: "Keten Tohumu 'Botoksu'",
+    description: "Keten tohumunu suda kaynatıp süzün. Elde ettiğiniz jeli cildinize sürün ve kuruyana kadar bekleyin. Doğal bir germe etkisi (lifting) sağlar ve gözenekleri sıkılaştırır.",
+    icon: "🌾",
+    color: "bg-amber-50 text-amber-700",
+    tag: "Doğal Lifting"
   },
   {
     id: 't2',
-    title: "Çilek Bacaklara Son!",
-    description: "Bacaklarınızdaki o kırmızı noktalardan bıkmadınız mı? Duştan önce mutlaka 'Kuru Fırçalama' yapın. Kan dolaşımı hızlanır, batıklar çıkar ve bacaklarınız pürüzsüzleşir. Selülite de birebir!",
-    icon: "🍓",
-    color: "bg-red-50 text-red-600",
-    tag: "Vücut Bakımı"
+    title: "Yeşil Çay Buz Küpleri",
+    description: "Demlediğiniz yeşil çayı buz kalıplarına dökün. Sabahları göz altlarınızda gezdirerek şişlikleri anında indirebilir ve morlukların görünümünü azaltabilirsiniz.",
+    icon: "🍵",
+    color: "bg-green-50 text-green-700",
+    tag: "Ödem Atıcı"
   },
   {
     id: 't3',
-    title: "Dudak Dolgusu Etkisi",
-    description: "İğnesiz dolgun dudaklar için: Bir çay kaşığı tarçın ve biraz vazelini karıştırıp dudaklarınıza sürün. 2 dakika bekleyip silin. Hafif karıncalanma olacak ama sonuç: Doğal ve dolgun dudaklar!",
+    title: "Doğal Dudak Dolgunlaştırıcı",
+    description: "Bir çay kaşığı vazelin içine bir damla tarçın yağı ekleyin. Dudaklarınıza sürdüğünüzde kan dolaşımı hızlanacak, daha dolgun ve pembe bir görünüm kazanacaktır.",
     icon: "💋",
-    color: "bg-pink-50 text-pink-600",
-    tag: "Makyaj Hilesi"
+    color: "bg-rose-50 text-rose-700",
+    tag: "Hızlı Etki"
   },
   {
     id: 't4',
-    title: "Yastık İziyle Uyanmayın",
-    description: "Pamuklu yastık kılıfları cildinizin nemini emer ve kırışıklık yapar. İpek veya saten kılıf kullanmak, hem saçlarınızın kırılmasını önler hem de 'uyku kırışıklığı' oluşumunu engeller.",
-    icon: "🛏️",
-    color: "bg-purple-50 text-purple-600",
-    tag: "Anti-Aging"
+    title: "Soğuk Kaşık Masajı",
+    description: "İki metal kaşığı dondurucuda bekletin. Elmacık kemiklerinizden şakaklarınıza doğru soğuk kaşıklarla masaj yapın. Yüz hattınızı belirginleştirir (Jawline etkisi).",
+    icon: "🥄",
+    color: "bg-blue-50 text-blue-700",
+    tag: "Yüz Yogası"
   },
   {
     id: 't5',
-    title: "Kaş Kirpik Serumu",
-    description: "Pahalı serumlara gerek yok! Bitmiş bir maskara fırçanızı temizleyin. Hint yağı ve E vitamini kapsülünü karıştırıp her gece kaş ve kirpiklerinize sürün. 1 ayda değişime inanamayacaksınız.",
+    title: "Kaş & Kirpik Serumu",
+    description: "Hint yağı ve E vitamini kapsülünü karıştırıp eski bir maskara fırçasıyla her gece kaş ve kirpiklerinize sürün. 2 haftada fark edilir gürleşme sağlar.",
     icon: "👁️",
-    color: "bg-yellow-50 text-yellow-600",
-    tag: "Doğal Bakım"
+    color: "bg-purple-50 text-purple-700",
+    tag: "Gürleştirici"
   },
   {
     id: 't6',
-    title: "Buzlu Kaşık Yöntemi",
-    description: "Sabah şiş gözlerle mi uyandınız? İki metal kaşığı 5 dakika buzlukta bekletin. Göz altlarınıza hafifçe bastırın. Soğuk şok etkisiyle şişlikler iner ve bakışlarınız anında canlanır.",
-    icon: "🧊",
-    color: "bg-blue-50 text-blue-600",
-    tag: "Hızlı Çözüm"
+    title: "Porselen El Bakımı",
+    description: "Toz şeker ve zeytinyağını karıştırıp ellerinize peeling yapın. Ardından nemlendirici sürüp pamuklu eldivenle uyuyun. Sabah yumuşacık ellere uyanın.",
+    icon: "🧤",
+    color: "bg-stone-100 text-stone-700",
+    tag: "El Bakımı"
+  },
+  {
+    id: 't7',
+    title: "Kahve Telvesi Mucizesi",
+    description: "İçtiğiniz kahvenin telvesini banyo sırasında selülitli bölgelere dairesel hareketlerle uygulayın. Kafein kan dolaşımını hızlandırır ve pürüzsüzleştirir.",
+    icon: "☕",
+    color: "bg-orange-50 text-orange-800",
+    tag: "Vücut Bakımı"
+  },
+  {
+    id: 't8',
+    title: "Yastık Kılıfı Sırrı",
+    description: "Pamuk yerine ipek veya saten yastık kılıfı kullanın. Gece boyunca cildinizin nemini emmez ve sabah uyandığınızda 'yastık izi' ile kırışıklık oluşumunu engeller.",
+    icon: "🛌",
+    color: "bg-pink-50 text-pink-700",
+    tag: "Uyku Güzelliği"
   }
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
-    name: 'Ayşe Yılmaz',
-    comment: 'Aura Güzellik ekibine çok teşekkürler! Lazer epilasyon sonuçlarımdan inanılmaz memnunum. Çerkezköy\'de tek adresim.',
+    name: 'Merve Güneş',
+    comment: 'Lazer epilasyonda tek adresim diyebilirim. Aura Güzellik ekibi çok titiz çalışıyor, seanslarım çok konforlu geçiyor. Sonuç harika!',
     rating: 5
   },
   {
     id: '2',
-    name: 'Selin Kaya',
-    comment: 'Merkezde yaptırdığım cilt bakımı cildime resmen nefes aldırdı. İlgi ve alakaları harika.',
+    name: 'Ebru Aydın',
+    comment: 'Saç boyama işlemimden inanılmaz memnun kaldım, tam hayal ettiğim ton oldu. Aura Güzellik ekibi gerçekten işinin ehli.',
     rating: 5
   },
   {
     id: '3',
-    name: 'Zeynep Demir',
-    comment: 'İpek kirpik uygulaması o kadar doğal oldu ki... Ellerinize sağlık Aura ekibi.',
+    name: 'Zeynep Bulut',
+    comment: 'Kaşlarım o kadar doğal ve güzel oldu ki! Aura Güzellik ekibine ilgileri ve profesyonel dokunuşları için çok teşekkür ederim.',
     rating: 5
   },
   {
     id: '4',
-    name: 'Elif Çelik',
-    comment: 'Microblading işlemi yaptırdım, kaşlarım tam istediğim formda oldu. Hijyen konusunda çok titizler.',
+    name: 'Ceren Dağlı',
+    comment: 'Tırnak tasarımlarına bayılıyorum. Aura Güzellik ekibi hem çok hijyenik hem de çok yetenekli. Her ay mutlaka buradayım.',
     rating: 5
   },
   {
     id: '5',
-    name: 'Berna Soylu',
-    comment: 'Gelin bakım paketimi burada yaptırdım. Manikürden saç bakımına her şey kusursuzdu.',
+    name: 'Derya Aksoy',
+    comment: 'Saç kesimimden çok memnun kaldım, yüz hattıma en uygun modeli Aura Güzellik ekibiyle birlikte seçtik. Çok başarılı!',
     rating: 5
   },
   {
     id: '6',
-    name: 'Merve Akay',
-    comment: 'Randevu saatlerine çok sadıklar. Pazar günü açık olmaları çalışanlar için büyük avantaj.',
-    rating: 4
+    name: 'Selin Kaya',
+    comment: 'İpek kirpiklerim hem gür hem de çok doğal duruyor. Aura Güzellik ekibi sayesinde sabahları makyaj yapma derdim kalmadı.',
+    rating: 5
   }
 ];
