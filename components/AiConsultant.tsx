@@ -16,46 +16,26 @@ const AiConsultant: React.FC = () => {
     }
   ]);
   
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
+  // Sizin belirttiğiniz profesyonel soru seti
   const questionPool = [
-    "Aura Glow bakımı nedir? ✨",
-    "Cam cilt (Glass Skin) için hangi protokol uygun? 💎",
-    "Acısız buz lazer ile yaza hazır mıyım? ❄️",
-    "Somon DNA aşısı cildi gençleştirir mi? 🧬",
-    "Dudak renklendirmede hangi tonlar trend? 💋",
-    "Gıdı eritme ve çene hattı (Jawline) mümkün mü? 🪄",
-    "İpek kirpik mi yoksa kirpik lifting mi yaptırmalıyım? 🦋",
-    "Kaş laminasyonu ile doğal kalkık kaşlar ne kadar sürer? 👁️",
-    "Bölgesel incelmede G5 masajı kaç seans önerilir? 📏",
-    "Dermapen ile gözeneklerimden kurtulabilir miyim? 💉",
-    "Düğün paketi hazırlıklarına ne zaman başlamalıyım? 👰",
-    "Microblading sonrası bakım nasıl olmalı? 🎨",
-    "Leke protokolü ile güneş lekelerinden kurtulur muyum? 🧪",
-    "En çok önerilen cilt bakımı hangisi? 🤫",
-    "Tırnak sanatında (Nail Art) bu sezon ne moda? 💅",
-    "HydraFacial sonrası cildim ne kadar süre parlar? 💧"
+    "Lazer epilasyon işlemi kaç seansta kesin sonuç verir?",
+    "Cilt bakımı sonrası sivilcelenme olması normal midir?",
+    "Microblading (kalıcı kaş) işlemi zamanla renk değiştirir mi?",
+    "Protez tırnak kullanımı kendi tırnağımın hava almasını engeller mi?",
+    "Yazın lazer epilasyon yaptırmak ciltte leke bırakır mı?",
+    "Bölgesel incelme işlemleri spor yapmadan tek başına etkili olur mu?",
+    "Kirpik lifting işlemi ne kadar süre boyunca etkisini korur?",
+    "Hamilelik ve emzirme döneminde hangi güzellik işlemleri güvenlidir?",
+    "Kaş laminasyonu işlemi kaş kıllarının dökülmesine neden olur mu?",
+    "İpek kirpik uygulaması doğal kirpiklere zarar verir mi?"
   ];
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, loading]);
-
-  useEffect(() => {
-    const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
-    setDisplayQuestions(shuffled.slice(0, 6));
+    // 10 sorunun tamamını gösteriyoruz
+    setDisplayQuestions([...questionPool]);
   }, []);
-
-  const scrollToBottom = () => {
-    if (chatContainerRef.current) {
-      const { scrollHeight, clientHeight } = chatContainerRef.current;
-      chatContainerRef.current.scrollTo({
-        top: scrollHeight - clientHeight,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   const handleAsk = async (e?: React.FormEvent, overrideQuery?: string) => {
     if (e) e.preventDefault();
@@ -69,161 +49,88 @@ const AiConsultant: React.FC = () => {
     setQuery('');
     setMessages(currentMessages);
     
-    const thinkingDelay = 1200; 
-
-    setTimeout(async () => {
-      setLoading(true);
-      const advice = await getBeautyAdvice(currentMessages);
-      const typingDuration = Math.max(1500, Math.min(3500, advice.length * 15));
-      
-      setTimeout(() => {
-        setMessages(prev => [...prev, { role: 'model', text: advice }]);
-        setLoading(false);
-      }, typingDuration);
-
-    }, thinkingDelay);
-  };
-
-  const handleSuggestionClick = (suggestion: string) => {
-    handleAsk(undefined, suggestion);
+    setLoading(true);
+    const advice = await getBeautyAdvice(currentMessages);
+    setMessages(prev => [...prev, { role: 'model', text: advice }]);
+    setLoading(false);
   };
 
   const renderMessageText = (text: string) => {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
-    const phoneRegex = /(0546\s618\s30\s62)/g;
-
     const parts = text.split(urlRegex);
 
-    return parts.map((part, i) => {
-      if (part.match(urlRegex)) {
-        return (
-          <a key={`link-${i}`} href={part} target="_blank" rel="noopener noreferrer" className="text-white font-bold inline-flex items-center gap-2 py-3 px-8 bg-rose-600 rounded-full my-3 shadow-md text-sm md:text-base hover:bg-rose-700 transition-all transform hover:scale-105 active:scale-95">
-             📅 Hemen Randevu Al & Bilgi İste
-          </a>
-        );
-      } else {
-        const subParts = part.split(phoneRegex);
-        return (
-          <span key={`text-${i}`}>
-            {subParts.map((sub, j) => sub.match(phoneRegex) ? (
-              <a key={j} href="tel:+905466183062" className="text-rose-600 font-bold underline"> {sub} </a>
-            ) : sub)}
-          </span>
-        );
-      }
-    });
+    return parts.map((part, i) => part.match(urlRegex) ? (
+      <a key={`link-${i}`} href={part} target="_blank" rel="noopener noreferrer" className="text-white font-bold inline-flex items-center gap-2 py-2 px-6 bg-rose-600 rounded-full my-2 shadow-md text-xs md:text-sm">
+         📅 Randevu & Bilgi Al
+      </a>
+    ) : <span key={`text-${i}`}>{part}</span>);
   };
 
   return (
-    <section className="py-12 md:py-24 bg-rose-50/10 w-full overflow-hidden flex flex-col items-center">
-      <div className="w-full max-w-7xl mx-auto px-2 md:px-6">
+    <section className="py-8 md:py-24 bg-rose-50/10 w-full overflow-hidden flex flex-col items-center">
+      <div className="w-full max-w-5xl mx-auto px-2 md:px-6">
         
-        <div className="w-full text-center mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-3 bg-white px-6 py-2 rounded-full shadow-sm border border-rose-100 mb-6">
-             <div className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></div>
-             <span className="text-rose-900 font-bold text-xs uppercase tracking-[0.2em]">Aura Uzman Hattı</span>
-          </div>
-          <h2 className="text-3xl md:text-6xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Size Nasıl Yardımcı Olabiliriz?</h2>
-          <p className="text-gray-500 text-sm md:text-xl font-medium max-w-2xl mx-auto">Aura Güzellik uzmanlığıyla merak ettiğiniz tüm işlemleri yanıtlıyoruz.</p>
+        <div className="w-full text-center mb-6">
+          <h2 className="text-2xl md:text-5xl font-serif font-bold text-gray-900 mb-2">Aura Uzman Asistan</h2>
         </div>
 
-        <div className="w-full bg-white rounded-[2rem] md:rounded-[3.5rem] border-2 md:border-4 border-rose-100 flex flex-col h-[550px] md:h-[750px] shadow-[0_30px_60px_-15px_rgba(255,228,230,0.6)] overflow-hidden relative">
+        <div className="w-full bg-white rounded-[1.5rem] md:rounded-[3rem] border border-rose-100 flex flex-col h-[500px] md:h-[700px] shadow-xl overflow-hidden relative">
           
-          <div className="bg-white border-b border-rose-50 p-5 md:p-8 flex items-center justify-between z-10">
-             <div className="flex items-center gap-4 md:gap-6">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-rose-50 p-1 border-2 border-rose-100 shadow-sm overflow-hidden">
-                   <img src={AVATAR_IMAGE_URL} alt="Avatar" className="w-full h-full object-cover" />
-                </div>
-                <div>
-                   <h3 className="text-gray-900 font-bold text-lg md:text-2xl">Canlı Güzellik Danışmanı</h3>
-                   <div className="flex items-center gap-2">
-                      <span className={`w-2 h-2 rounded-full ${loading ? 'bg-orange-400 animate-pulse' : 'bg-green-500'}`}></span>
-                      <span className="text-[10px] md:text-xs text-rose-400 font-bold uppercase tracking-widest">
-                        {loading ? 'Şu an yazıyor...' : 'Çevrimiçi & Hazır'}
-                      </span>
-                   </div>
-                </div>
+          <div className="bg-white border-b border-rose-50 p-4 md:p-6 flex items-center gap-4">
+             <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-rose-50 p-1 border border-rose-100 overflow-hidden">
+                <img src={AVATAR_IMAGE_URL} alt="Avatar" className="w-full h-full object-cover" />
+             </div>
+             <div>
+                <h3 className="text-gray-900 font-bold text-sm md:text-lg">Canlı Güzellik Danışmanı</h3>
+                <span className="text-[10px] text-green-500 font-bold uppercase tracking-widest">Çevrimiçi</span>
              </div>
           </div>
 
-          <div 
-            ref={chatContainerRef}
-            className="flex-1 overflow-y-auto p-5 md:p-12 space-y-6 md:space-y-10 bg-white hide-scrollbar scroll-smooth relative"
-          >
+          <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 md:p-8 space-y-4 md:space-y-6 bg-white hide-scrollbar scroll-smooth">
             {messages.map((msg, idx) => (
-              <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in-up`}>
-                <div 
-                  className={`max-w-[90%] md:max-w-[75%] p-5 md:p-8 rounded-2xl md:rounded-[2.5rem] text-[16px] md:text-[19px] leading-relaxed shadow-sm transition-all ${
-                    msg.role === 'user' 
-                      ? 'bg-rose-600 text-white rounded-tr-none font-medium' 
-                      : 'bg-rose-50/40 text-gray-800 border border-rose-100/50 rounded-tl-none font-medium'
-                  }`}
-                >
+              <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`max-w-[85%] p-4 rounded-2xl text-[14px] md:text-[16px] ${msg.role === 'user' ? 'bg-rose-600 text-white' : 'bg-rose-50/60 text-gray-800'}`}>
                   {renderMessageText(msg.text)}
                 </div>
               </div>
             ))}
-            
-            {loading && (
-              <div className="flex justify-start items-center gap-4 animate-fade-in-up pb-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-rose-50 border border-rose-100 p-1 overflow-hidden shrink-0">
-                  <img src={AVATAR_IMAGE_URL} alt="Yazıyor" className="w-full h-full object-cover opacity-50" />
-                </div>
-                <div className="bg-rose-50/50 px-6 py-4 rounded-3xl rounded-tl-none border border-rose-100 flex items-center gap-2">
-                  <span className="text-xs md:text-sm font-bold text-rose-400 italic">Uzmanımız yazıyor</span>
-                  <div className="flex gap-1">
-                    <div className="w-1.5 h-1.5 bg-rose-300 rounded-full animate-bounce"></div>
-                    <div className="w-1.5 h-1.5 bg-rose-300 rounded-full animate-bounce delay-100"></div>
-                    <div className="w-1.5 h-1.5 bg-rose-300 rounded-full animate-bounce delay-200"></div>
-                  </div>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} className="h-2" />
+            {loading && <div className="text-xs text-rose-400 font-bold italic animate-pulse">Uzmanımız yazıyor...</div>}
           </div>
 
-          <div className="px-5 md:px-12 py-5 bg-white border-t border-rose-50 overflow-x-auto whitespace-nowrap hide-scrollbar">
-            <div className="flex gap-3 md:gap-4 pb-2">
-              {displayQuestions.map((q, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleSuggestionClick(q)}
-                  disabled={loading}
-                  className="px-6 py-3 md:px-10 md:py-4 bg-white hover:bg-rose-50 text-rose-950 rounded-full text-[13px] md:text-[16px] font-bold border-2 border-rose-100 hover:border-rose-300 active:scale-95 transition-all shadow-md flex items-center gap-2 group shrink-0"
-                >
-                  <span className="text-lg group-hover:scale-125 transition-transform duration-300">✨</span>
-                  {q}
-                </button>
-              ))}
-            </div>
+          {/* Kaydırılabilir Soru Önerileri - Mobil Optimizasyonlu */}
+          <div className="px-4 py-3 bg-gray-50/50 border-t border-rose-50 overflow-x-auto whitespace-nowrap hide-scrollbar flex gap-2">
+            {displayQuestions.map((q, idx) => (
+              <button
+                key={idx}
+                onClick={() => handleAsk(undefined, q)}
+                disabled={loading}
+                className="inline-flex items-center justify-center px-3 py-2 bg-white text-rose-900 rounded-xl text-[10px] md:text-sm font-medium border border-rose-100 hover:border-rose-300 transition-all shrink-0 shadow-sm w-[135px] md:w-auto h-auto text-center leading-[1.2] whitespace-normal"
+              >
+                {q}
+              </button>
+            ))}
           </div>
 
-          <form onSubmit={(e) => handleAsk(e)} className="p-5 md:p-12 bg-white border-t border-rose-50 z-10">
-            <div className="relative flex items-center gap-4 max-w-5xl mx-auto">
+          <form onSubmit={(e) => handleAsk(e)} className="p-4 md:p-8 bg-white border-t border-rose-50">
+            <div className="relative flex items-center gap-2">
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Buraya aklındakini yaz canım..."
-                className="w-full pl-8 md:pl-10 pr-20 py-5 md:py-7 rounded-full bg-gray-50 border-2 border-transparent focus:border-rose-200 focus:bg-white transition-all text-[16px] md:text-xl outline-none text-gray-800 placeholder-gray-400 font-medium shadow-inner"
+                placeholder="Buraya bir şey yaz..."
+                className="w-full pl-4 pr-12 py-3 md:py-4 rounded-full bg-gray-50 border-0 focus:ring-1 focus:ring-rose-200 text-sm md:text-base outline-none"
               />
               <button 
                 type="submit"
                 disabled={loading || !query.trim()}
-                className="absolute right-3 md:right-4 p-4 md:p-5 bg-rose-600 text-white rounded-full hover:bg-rose-700 disabled:bg-gray-200 shadow-lg active:scale-90 transition-all flex items-center justify-center group"
+                className="absolute right-2 p-2 bg-rose-600 text-white rounded-full hover:bg-rose-700 disabled:bg-gray-200 transition-all"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 md:w-8 md:h-8 group-hover:translate-x-1 transition-transform">
-                  <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
                 </svg>
               </button>
             </div>
           </form>
-        </div>
-
-        <div className="mt-10 text-center text-rose-300 font-semibold text-sm md:text-base uppercase tracking-widest flex items-center justify-center gap-4">
-           <div className="h-px w-12 bg-rose-100"></div>
-           Aura Güzellik | Profesyonel Bakım
-           <div className="h-px w-12 bg-rose-100"></div>
         </div>
       </div>
     </section>

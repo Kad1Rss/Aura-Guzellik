@@ -95,38 +95,39 @@ const App: React.FC = () => {
              <div className="absolute w-96 h-96 bg-rose-500 rounded-full blur-3xl bottom-0 right-0"></div>
           </div>
           
-          <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="max-w-7xl mx-auto px-2 md:px-4 relative z-10">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl md:text-4xl font-serif mb-2 md:mb-4 flex items-center justify-center gap-3 text-white">
                  <span>⭐</span> Mutlu Danışanlarımız <span>⭐</span>
               </h2>
-              <p className="text-rose-200 max-w-2xl mx-auto text-sm md:text-base">Güzellik yolculuğumuzda bize eşlik edenlerin gerçek hikayeleri.</p>
+              <p className="text-rose-200 max-w-2xl mx-auto text-xs md:text-base px-4">Güzellik yolculuğumuzda bize eşlik edenlerin gerçek hikayeleri.</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {/* Grid updated: 2 columns on mobile, 3 on large screens */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
               {TESTIMONIALS.map((t) => (
-                <div key={t.id} className="bg-white/10 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col h-full relative group">
+                <div key={t.id} className="bg-white/10 backdrop-blur-md p-3 md:p-8 rounded-xl md:rounded-2xl border border-white/10 hover:bg-white/20 transition-all duration-300 flex flex-col h-full relative group">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-rose-400 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
                   
-                  <div className="relative flex text-yellow-400 mb-4 scale-100">
+                  <div className="relative flex text-yellow-400 mb-2 md:mb-4 scale-75 md:scale-100 origin-left">
                     {[...Array(t.rating)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                      <svg key={i} className="w-4 h-4 md:w-5 md:h-5 fill-current" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     ))}
                   </div>
 
-                  <p className="relative italic mb-6 text-rose-50 text-sm md:text-[15px] leading-relaxed flex-grow">
+                  <p className="relative italic mb-3 md:mb-6 text-rose-50 text-[10px] md:text-[15px] leading-tight md:leading-relaxed flex-grow line-clamp-4 md:line-clamp-none">
                     "{t.comment}"
                   </p>
 
-                  <div className="relative flex items-center gap-3 mt-auto pt-4 border-t border-white/10">
-                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex items-center justify-center text-sm font-bold shrink-0 border border-white/30 shadow-inner">
+                  <div className="relative flex items-center gap-2 md:gap-3 mt-auto pt-2 md:pt-4 border-t border-white/10">
+                     <div className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex items-center justify-center text-[10px] md:text-sm font-bold shrink-0 border border-white/30 shadow-inner">
                         {t.name.charAt(0)}
                      </div>
-                     <div>
-                        <p className="font-bold text-white text-sm md:text-base">{t.name}</p>
-                        <p className="text-[10px] uppercase tracking-widest text-rose-300 font-semibold">Doğrulanmış Danışan</p>
+                     <div className="overflow-hidden">
+                        <p className="font-bold text-white text-[10px] md:text-base truncate">{t.name}</p>
+                        <p className="text-[7px] md:text-[10px] uppercase tracking-tighter md:tracking-widest text-rose-300 font-semibold truncate">Doğrulanmış Danışan</p>
                      </div>
                   </div>
                 </div>
